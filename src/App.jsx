@@ -19,7 +19,7 @@ function App() {
   const [disabledLetters, setDisabledLetters] = useState([])
   const [gameOver, setGameOver] = useState({gameOver: false, guessedWord: false})
   const [correctWord, setCorrectWord] = useState('')
-  const [highContrast, setHighContrast] = useState(true)
+  const [highContrast, setHighContrast] = useState(false)
 
 
   useEffect(() => {
@@ -80,9 +80,6 @@ function App() {
 
   return (
     <div className="App">
-      {/* <nav>
-        <h1>Wordle</h1>
-      </nav> */}
       <Navbar />
       <AppContext.Provider
         value={{
