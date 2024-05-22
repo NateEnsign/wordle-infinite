@@ -3,7 +3,6 @@
   background-color: #121212;
   width: 100vw;
   height: 100vh;
-  /* display: flex; */
   color: white;
 }
 
@@ -13,32 +12,67 @@ body {
 }
 
 nav {
-  height: 60px;
-  width: 100%;
-  margin: 0;
-  border-bottom: 1px solid grey;
-  display: grid;
-  place-items: center;
-}
-
-nav h1 {
-  margin: 0;
-  font-family: Helvetica, Arial, sans-serif;
-  color: white;
-  font-size: 45px;
-}
-.game {
-  width: 100vw;
-  height: calc(100vh - 170px);
+  height: 80px;
   display: flex;
   align-items: center;
-  padding-top: 50px;
+  background-color: black;
+  color: white;
+  padding: 0 5%;
+  border-bottom: 1px solid #3A3A3D;
+}
+
+nav button {
+  all: unset;
+}
+
+nav button:hover {
+  cursor: pointer;
+  scale: 1.1;
+}
+
+.nav-left {
+  display: flex;
+  gap: 15px;
+  flex: 1;
+}
+
+.nav-barChart {
+  stroke-width: 4px;
+  height: 30px;
+  width: 30px;
+}
+
+.nav-icon {
+  height: 30px;
+  width: 30px;
+  stroke-width: 2.5px;
+}
+
+.nav-middle {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.nav-right {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.game {
+  width: 100vw;
+  height: calc(100vh - 80px);
+  display: flex;
+  align-items: center;
+  padding-top: 10px;
   flex-direction: column;
 }
 
 .board {
-  width: 450px;
-  height: 550px;
+  width: 350px;
+  height: 380px;
+  /* height: 850px; */
   border: 1px solid black;
   display: flex;
   flex-direction: column;
@@ -46,6 +80,7 @@ nav h1 {
 
 .row {
   flex: 33%;
+  /* height: 60px; */
   display: flex;
   flex-direction: row;
   margin: 5px;
@@ -76,10 +111,18 @@ nav h1 {
   background-color: #3a393c;
 }
 
+#correct-contrast {
+  background-color: #F5793A;
+}
+
+#almost-contrast {
+  background-color: #85BFF9;
+}
+
 .keyboard {
   width: 700px;
-  height: 300px;
-  margin-top: 60px;
+  height: 250px;
+  margin-top: 10px;
 }
 
 .line1 {
@@ -124,4 +167,8 @@ nav h1 {
 }
 #disabled {
   background-color: #3a393c;
+}
+
+.GameOver {
+  padding: 80px;
 }

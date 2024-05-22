@@ -1,8 +1,11 @@
-import React, { useState, createContext } from "react";
+import React, { useState, createContext, useEffect } from "react";
 import "./App.css";
 import Board from "./components/Board";
 import Keyboard from "./components/Keyboard";
 import { boardDefault } from "./Words";
+import { generateWordSet } from "./Words";
+import GameOver from "./components/GameOver";
+import Navbar from "./components/Navbar";
 
 export const AppContext = createContext();
 
@@ -12,6 +15,19 @@ function App() {
     attempt: 0,
     letterPos: 0,
   });
+  const [wordSet, setWordSet] = useState(new Set())
+  const [disabledLetters, setDisabledLetters] = useState([])
+  const [gameOver, setGameOver] = useState({gameOver: false, guessedWord: false})
+  const [correctWord, setCorrectWord] = useState('')
+  const [highContrast, setHighContrast] = useState(true)
+
+
+  useEffect(() => {
+    generateWordSet().then((words) => {
+      setWordSet(words.wordSet)
+      setCorrectWord(words.todaysWord)
+    })
+  }, [])
 
   const onSelectLetter = (keyVal) => {
     if (currentAttempt.letterPos > 4) return;
@@ -37,14 +53,37 @@ function App() {
 
   const onEnter = () => {
     if (currentAttempt.letterPos !== 5) return;
-    setCurrentAttempt({ attempt: currentAttempt.attempt + 1, letterPos: 0 });
+
+    let currWord = "";
+    for (let i = 0; i < 5; i++){
+      currWord += board[currentAttempt.attempt][i]
+    }
+
+    if (wordSet.has(currWord.toLowerCase())) {
+      setCurrentAttempt({attempt: currentAttempt.attempt + 1, letterPos: 0})
+    } else {
+      alert('Word Not Found')
+    }
+
+    if (currWord.toLowerCase() === correctWord){
+      setGameOver({gameOver: true, guessedWord: true})
+      return;
+    }
+
+    if (currentAttempt.attempt === 5){
+      setGameOver({gameOver: true, guessedWord: false})
+      return;
+    }
+
   };
+
 
   return (
     <div className="App">
-      <nav>
+      {/* <nav>
         <h1>Wordle</h1>
-      </nav>
+      </nav> */}
+      <Navbar />
       <AppContext.Provider
         value={{
           board,
@@ -54,11 +93,18 @@ function App() {
           onSelectLetter,
           onDelete,
           onEnter,
+          correctWord,
+          disabledLetters,
+          setDisabledLetters,
+          gameOver,
+          setGameOver,
+          highContrast,
+          setHighContrast,
         }}
       >
         <div className="game">
           <Board />
-          <Keyboard />
+          {gameOver.gameOver ? <GameOver /> : <Keyboard />}
         </div>
       </AppContext.Provider>
     </div>
