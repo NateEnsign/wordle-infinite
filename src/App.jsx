@@ -62,7 +62,7 @@ function App() {
     if (wordSet.has(currWord.toLowerCase())) {
       setCurrentAttempt({attempt: currentAttempt.attempt + 1, letterPos: 0})
     } else {
-      alert('Word Not Found')
+      alert('Word Not On List')
     }
 
     if (currWord.toLowerCase() === correctWord){
