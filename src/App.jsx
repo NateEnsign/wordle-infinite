@@ -17,9 +17,13 @@ function App() {
   });
   const [wordSet, setWordSet] = useState(new Set())
   const [disabledLetters, setDisabledLetters] = useState([])
+
+  const [correctKeys, setCorrectKeys] = useState([])
+  const [almostKeys, setAlmostKeys] = useState([])
+
   const [gameOver, setGameOver] = useState({gameOver: false, guessedWord: false})
   const [correctWord, setCorrectWord] = useState('')
-  const [highContrast, setHighContrast] = useState(false)
+  const [highContrast, setHighContrast] = useState(true)
 
 
   useEffect(() => {
@@ -70,10 +74,12 @@ function App() {
       return;
     }
 
-    if (currentAttempt.attempt === 5){
+    if (currentAttempt.attempt === 5 && wordSet.has(currWord.toLowerCase())){
       setGameOver({gameOver: true, guessedWord: false})
       return;
     }
+
+    
 
   };
 
@@ -97,6 +103,10 @@ function App() {
           setGameOver,
           highContrast,
           setHighContrast,
+          correctKeys,
+          setCorrectKeys,
+          almostKeys,
+          setAlmostKeys,
         }}
       >
         <div className="game">

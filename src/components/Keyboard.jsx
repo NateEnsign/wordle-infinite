@@ -7,7 +7,7 @@ const Keyboard = () => {
   const keys2 = ["A", "S", "D", "F", "G", "H", "J", "K", "L"];
   const keys3 = ["Z", "X", "C", "V", "B", "N", "M"];
 
-  const { onEnter, onDelete, onSelectLetter, disabledLetters } =
+  const { onEnter, onDelete, onSelectLetter, disabledLetters, correctKeys, almostKeys } =
     useContext(AppContext);
 
   const handleKeyboard = useCallback((event) => {
@@ -50,6 +50,8 @@ const Keyboard = () => {
             <Key
               key={key}
               keyVal={key}
+              correct={correctKeys.includes(key)}
+              almost={almostKeys.includes(key)}
               disabled={disabledLetters.includes(key)}
             />
           );
@@ -61,6 +63,8 @@ const Keyboard = () => {
             <Key
               key={key}
               keyVal={key}
+              correct={correctKeys.includes(key)}
+              almost={almostKeys.includes(key)}
               disabled={disabledLetters.includes(key)}
             />
           );
@@ -73,6 +77,8 @@ const Keyboard = () => {
             <Key
               key={key}
               keyVal={key}
+              correct={correctKeys.includes(key)}
+              almost={almostKeys.includes(key)}
               disabled={disabledLetters.includes(key)}
             />
           );
