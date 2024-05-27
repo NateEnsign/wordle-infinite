@@ -7,7 +7,7 @@ const Keyboard = () => {
   const keys2 = ["A", "S", "D", "F", "G", "H", "J", "K", "L"];
   const keys3 = ["Z", "X", "C", "V", "B", "N", "M"];
 
-  const { onEnter, onDelete, onSelectLetter, disabledLetters, correctKeys, almostKeys } =
+  const { onEnter, onDelete, onSelectLetter, disabledLetters, correctKeys, almostKeys, } =
     useContext(AppContext);
 
   const handleKeyboard = useCallback((event) => {

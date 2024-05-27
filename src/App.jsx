@@ -23,7 +23,7 @@ function App() {
 
   const [gameOver, setGameOver] = useState({gameOver: false, guessedWord: false})
   const [correctWord, setCorrectWord] = useState('')
-  const [highContrast, setHighContrast] = useState(true)
+  const [highContrast, setHighContrast] = useState(false)
 
 
   useEffect(() => {
@@ -62,7 +62,7 @@ function App() {
     for (let i = 0; i < 5; i++){
       currWord += board[currentAttempt.attempt][i]
     }
-
+  
     if (wordSet.has(currWord.toLowerCase())) {
       setCurrentAttempt({attempt: currentAttempt.attempt + 1, letterPos: 0})
     } else {
@@ -78,8 +78,6 @@ function App() {
       setGameOver({gameOver: true, guessedWord: false})
       return;
     }
-
-    
 
   };
 
