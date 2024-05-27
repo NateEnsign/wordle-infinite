@@ -14,37 +14,42 @@ const Letter = ({ letterPos, attemptVal }) => {
 
   const letter = board[attemptVal][letterPos];
 
-  // Create an array from the correct word
   const correctWordArray = correctWord.toUpperCase().split('');
 
-  // Count occurrences of each letter in the correct word
   const correctWordCount = correctWordArray.reduce((acc, char) => {
     acc[char] = (acc[char] || 0) + 1;
     return acc;
   }, {});
 
-  // Track occurrences of correct and almost letters in the guess
   const guessCount = {};
+
+  let isCorrect = false;
+  let isAlmost = false;
+
   for (let i = 0; i < 5; i++) {
-    const guessedLetter = board[attemptVal][i];
-    if (correctWordArray[i] === guessedLetter) {
+    if (board[attemptVal][i] === correctWordArray[i]) {
+      const guessedLetter = board[attemptVal][i];
       guessCount[guessedLetter] = (guessCount[guessedLetter] || 0) + 1;
     }
   }
 
-  let isCorrect = correctWord.toUpperCase()[letterPos] === letter;
-  let isAlmost = !isCorrect && letter !== "" && correctWordArray.includes(letter) && 
-    (guessCount[letter] || 0) < (correctWordCount[letter] || 0);
-
-  if (isCorrect) {
-    guessCount[letter] = (guessCount[letter] || 0) + 1;
+  for (let i = 0; i < 5; i++) {
+    const guessedLetter = board[attemptVal][i];
+    if (!isCorrect && correctWordArray.includes(guessedLetter)) {
+      const totalCorrectAndAlmost = (guessCount[guessedLetter] || 0);
+      if (totalCorrectAndAlmost < correctWordCount[guessedLetter]) {
+        guessCount[guessedLetter] = totalCorrectAndAlmost + 1;
+        if (i === letterPos) {
+          isAlmost = true;
+        }
+      }
+    }
   }
 
-  const correct = correctWord.toUpperCase()[letterPos] === letter;
-
-  const almost = !correct &&
-    letter !== "" &&
-    correctWord.toUpperCase().includes(letter);
+  if (board[attemptVal][letterPos] === correctWordArray[letterPos]) {
+    isCorrect = true;
+    isAlmost = false;
+  }
 
   const letterState =
     currentAttempt.attempt > attemptVal &&
@@ -58,15 +63,19 @@ const Letter = ({ letterPos, attemptVal }) => {
       ? "almost-contrast"
       : "error");
 
-      useEffect(() => {
-        if (letter !== "" && correct) {
-          setCorrectKeys((prev) => [...prev, letter]);
-        } else if (letter !== "" && almost) {
-          setAlmostKeys((prev) => [...prev, letter]);
-        } else if (letter !== "" && !correct && !almost) {
-          setDisabledLetters((prev) => [...prev, letter]);
-        }
-      }, [currentAttempt.attempt]);
+      const correct = correctWord.toUpperCase()[letterPos] === letter;
+      const almost =
+        !correct && letter !== "" && correctWord.toUpperCase().includes(letter);
+
+  useEffect(() => {
+    if (letter !== "" && correct) {
+      setCorrectKeys((prev) => [...prev, letter]);
+    } else if (letter !== "" && almost) {
+      setAlmostKeys((prev) => [...prev, letter]);
+    } else if (letter !== "" && !correct && !almost) {
+      setDisabledLetters((prev) => [...prev, letter]);
+    }
+  }, [currentAttempt.attempt]);
 
   return (
     <div className="letter" id={letterState}>
@@ -76,5 +85,10 @@ const Letter = ({ letterPos, attemptVal }) => {
 };
 
 export default Letter;
+
+
+
+
+
 
 
