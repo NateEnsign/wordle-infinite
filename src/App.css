@@ -278,3 +278,10 @@ nav button:hover {
 .settings-btn-container {
   cursor: pointer;
 }
+
+.settings-option {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0px;
+}

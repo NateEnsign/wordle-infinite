@@ -15,23 +15,37 @@ function App() {
     attempt: 0,
     letterPos: 0,
   });
-  const [wordSet, setWordSet] = useState(new Set())
-  const [disabledLetters, setDisabledLetters] = useState([])
+  const [wordSet, setWordSet] = useState(new Set());
+  const [disabledLetters, setDisabledLetters] = useState([]);
 
-  const [correctKeys, setCorrectKeys] = useState([])
-  const [almostKeys, setAlmostKeys] = useState([])
+  const [correctKeys, setCorrectKeys] = useState([]);
+  const [almostKeys, setAlmostKeys] = useState([]);
 
-  const [gameOver, setGameOver] = useState({gameOver: false, guessedWord: false})
-  const [correctWord, setCorrectWord] = useState('')
-  const [highContrast, setHighContrast] = useState(false)
+  const [gameOver, setGameOver] = useState({
+    gameOver: false,
+    guessedWord: false,
+  });
+  const [correctWord, setCorrectWord] = useState("");
+  const [highContrast, setHighContrast] = useState(() => {
+    const savedContrast = localStorage.getItem('contrastState')
+    return savedContrast !== null ? JSON.parse(savedContrast) : false;
+  })
 
+  useEffect(() => {
+    localStorage.setItem('contrastState', JSON.stringify(highContrast))
+  }, [highContrast])
 
   useEffect(() => {
     generateWordSet().then((words) => {
-      setWordSet(words.wordSet)
-      setCorrectWord(words.todaysWord)
-    })
-  }, [])
+      setWordSet(words.wordSet);
+      setCorrectWord(words.todaysWord);
+    });
+  }, []);
+
+    const handleChangeContrast = () => {
+      setHighContrast(!highContrast);
+    };
+  
 
   const onSelectLetter = (keyVal) => {
     if (currentAttempt.letterPos > 4) return;
@@ -59,32 +73,29 @@ function App() {
     if (currentAttempt.letterPos !== 5) return;
 
     let currWord = "";
-    for (let i = 0; i < 5; i++){
-      currWord += board[currentAttempt.attempt][i]
+    for (let i = 0; i < 5; i++) {
+      currWord += board[currentAttempt.attempt][i];
     }
-  
+
     if (wordSet.has(currWord.toLowerCase())) {
-      setCurrentAttempt({attempt: currentAttempt.attempt + 1, letterPos: 0})
+      setCurrentAttempt({ attempt: currentAttempt.attempt + 1, letterPos: 0 });
     } else {
-      alert('Word Not On List')
+      alert("Word Not On List");
     }
 
-    if (currWord.toLowerCase() === correctWord){
-      setGameOver({gameOver: true, guessedWord: true})
+    if (currWord.toLowerCase() === correctWord) {
+      setGameOver({ gameOver: true, guessedWord: true });
       return;
     }
 
-    if (currentAttempt.attempt === 5 && wordSet.has(currWord.toLowerCase())){
-      setGameOver({gameOver: true, guessedWord: false})
+    if (currentAttempt.attempt === 5 && wordSet.has(currWord.toLowerCase())) {
+      setGameOver({ gameOver: true, guessedWord: false });
       return;
     }
-
   };
-
 
   return (
     <div className="App">
-      <Navbar />
       <AppContext.Provider
         value={{
           board,
@@ -105,8 +116,10 @@ function App() {
           setCorrectKeys,
           almostKeys,
           setAlmostKeys,
+          handleChangeContrast,
         }}
       >
+        <Navbar />
         <div className="game">
           <Board />
           {gameOver.gameOver ? <GameOver /> : <Keyboard />}
