@@ -23,7 +23,7 @@ const customStyles = {
     borderRadius: "8px",
     padding: "20px",
     height: "550px",
-    width: '470px',
+    width: "470px",
     maxWidth: "80%",
     maxHeight: "85%",
     overflow: "auto",
@@ -56,60 +56,62 @@ const Navbar = () => {
           onRequestClose={closeQuestionModal}
           style={customStyles}
         >
-          <div style={{paddingLeft: '30px'}}>
-            <div style={{textAlign: 'right'}}>
-              <button onClick={closeQuestionModal} style={{ all: "unset" }}>
-                <X
-                  style={{
-                    strokeWidth: "2.3px",
-                    height: "28px",
-                    width: "28px",
-                  }}
-                />
+          <div className="how-modal-body">
+            <div className="how-btn-container">
+              <button className="how-btn" onClick={closeQuestionModal}>
+                <X className="how-x" />
               </button>
             </div>
             <div>
-              <h1>How To Play</h1>
-              <h2 style={{fontWeight: 'normal'}}>Guess the Wordle in 6 tries.</h2>
+              <div className="how-title">How To Play</div>
+              <div className="how-sm-title">Guess the Wordle in 6 tries.</div>
             </div>
-            <ul style={{paddingRight: '100px'}}>
-              <li>Each guess must be a valid 5-letter word.</li>
-              <li>
+            <ul className="how-list">
+              <li className="how-list-item">
+                Each guess must be a valid 5-letter word.
+              </li>
+              <li className="how-list-item">
                 The color of the tiles will change to show how close your guess
                 was to the word.
               </li>
             </ul>
-            <h3>Examples</h3>
-            <div>
-              <span>W</span>
-              <span>E</span>
-              <span>A</span>
-              <span>R</span>
-              <span>Y</span>
+            <div className="how-examples-title">Examples</div>
+            <div className="how-example">
+              <div className="how-letter-container">
+                <span className="how-letter" id="how-letter-green">W</span>
+                <span className="how-letter">E</span>
+                <span className="how-letter">A</span>
+                <span className="how-letter">R</span>
+                <span className="how-letter">Y</span>
+              </div>
               <div>
-                <span>W</span>
+                <span className="how-bold">W</span>
                 <span> is in the word and in the correct spot.</span>
               </div>
             </div>
-            <div>
-              <span>P</span>
-              <span>I</span>
-              <span>L</span>
-              <span>L</span>
-              <span>S</span>
+            <div className="how-example">
+              <div className="how-letter-container">
+                <span className="how-letter">P</span>
+                <span className="how-letter" id="how-letter-yellow">I</span>
+                <span className="how-letter">L</span>
+                <span className="how-letter">L</span>
+                <span className="how-letter">S</span>
+              </div>
               <div>
-                <span>I</span>
+                <span className="how-bold">I</span>
                 <span> is in the word but in the wrong spot.</span>
               </div>
             </div>
-            <div>
-              <span>V</span>
-              <span>A</span>
-              <span>G</span>
-              <span>U</span>
-              <span>E</span>
+            <div className="how-example">
+              <div className="how-letter-container">
+                <span className="how-letter">V</span>
+                <span className="how-letter">A</span>
+                <span className="how-letter">G</span>
+                <span className="how-letter" id="how-letter-grey">U</span>
+                <span className="how-letter">E</span>
+              </div>
               <div>
-                <span>U</span>
+                <span className="how-bold">U</span>
                 <span> is not in the word in any spot.</span>
               </div>
             </div>
