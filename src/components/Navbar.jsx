@@ -3,6 +3,7 @@ import { CircleHelp, X } from "lucide-react";
 import { BarChart2 } from "lucide-react";
 import { Settings } from "lucide-react";
 import Modal from "react-modal";
+import QuestionModal from "./QuestionModal";
 
 const customStyles = {
   overlay: {
@@ -34,6 +35,17 @@ Modal.setAppElement("#root");
 
 const Navbar = () => {
   const [questionModalOpen, setQuestionModalOpen] = useState(false);
+  const [settingsModalOpen, setSettingsModalOpen] = useState(false);
+
+  const openSettingsModal = () => {
+    setSettingsModalOpen(true);
+    document.body.style.overflow = "hidden";
+  };
+
+  const closeSettingsModal = () => {
+    setSettingsModalOpen(false);
+    document.body.style.overflow = "auto";
+  };
 
   const openQuestionModal = () => {
     setQuestionModalOpen(true);
@@ -51,78 +63,51 @@ const Navbar = () => {
         <button onClick={openQuestionModal}>
           <CircleHelp className="nav-icon" />
         </button>
-        <Modal
-          isOpen={questionModalOpen}
-          onRequestClose={closeQuestionModal}
-          style={customStyles}
-        >
-          <div className="how-modal-body">
-            <div className="how-btn-container">
-              <button className="how-btn" onClick={closeQuestionModal}>
-                <X className="how-x" />
-              </button>
-            </div>
-            <div>
-              <div className="how-title">How To Play</div>
-              <div className="how-sm-title">Guess the Wordle in 6 tries.</div>
-            </div>
-            <ul className="how-list">
-              <li className="how-list-item">
-                Each guess must be a valid 5-letter word.
-              </li>
-              <li className="how-list-item">
-                The color of the tiles will change to show how close your guess
-                was to the word.
-              </li>
-            </ul>
-            <div className="how-examples-title">Examples</div>
-            <div className="how-example">
-              <div className="how-letter-container">
-                <span className="how-letter" id="how-letter-green">W</span>
-                <span className="how-letter">E</span>
-                <span className="how-letter">A</span>
-                <span className="how-letter">R</span>
-                <span className="how-letter">Y</span>
-              </div>
-              <div>
-                <span className="how-bold">W</span>
-                <span> is in the word and in the correct spot.</span>
-              </div>
-            </div>
-            <div className="how-example">
-              <div className="how-letter-container">
-                <span className="how-letter">P</span>
-                <span className="how-letter" id="how-letter-yellow">I</span>
-                <span className="how-letter">L</span>
-                <span className="how-letter">L</span>
-                <span className="how-letter">S</span>
-              </div>
-              <div>
-                <span className="how-bold">I</span>
-                <span> is in the word but in the wrong spot.</span>
-              </div>
-            </div>
-            <div className="how-example">
-              <div className="how-letter-container">
-                <span className="how-letter">V</span>
-                <span className="how-letter">A</span>
-                <span className="how-letter">G</span>
-                <span className="how-letter" id="how-letter-grey">U</span>
-                <span className="how-letter">E</span>
-              </div>
-              <div>
-                <span className="how-bold">U</span>
-                <span> is not in the word in any spot.</span>
-              </div>
-            </div>
-          </div>
-        </Modal>
+        <QuestionModal
+          closeQuestionModal={closeQuestionModal}
+          questionModalOpen={questionModalOpen}
+          setQuestionModalOpen={setQuestionModalOpen}
+        />
         <button>
           <BarChart2 className="nav-barChart" />
         </button>
         <button>
-          <Settings className="nav-icon" />
+          <Settings className="nav-icon" onClick={openSettingsModal} />
         </button>
+        <Modal
+          isOpen={settingsModalOpen}
+          onRequestClose={closeSettingsModal}
+          style={customStyles}
+        >
+          <div className="settings-modal-body">
+            <div className="settings-head">
+              <div className="settings-title">SETTINGS</div>
+              <div className="settings-btn-container">
+                <button className="how-btn" onClick={closeSettingsModal}>
+                  <X className="how-x" />
+                </button>
+              </div>
+            </div>
+            <div className="settings-options">
+              <div className="settings-option">
+                <div settings-option-left></div>
+                <div className="settings-option-right"></div>
+              </div>
+              <div className="settings-option">
+                <div settings-option-left></div>
+                <div className="settings-option-right"></div>
+              </div>
+              <div className="settings-option">
+                <div settings-option-left></div>
+                <div className="settings-option-right"></div>
+              </div>
+              <div className="settings-option">
+                <div settings-option-left></div>
+                <div className="settings-option-right"></div>
+              </div>
+            </div>
+          </div>
+        </Modal>
       </div>
       <div className="nav-middle">
         <h1>Wordle</h1>
