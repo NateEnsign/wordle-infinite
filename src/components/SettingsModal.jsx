@@ -82,7 +82,7 @@ const SettingsModal = ({ settingsModalOpen, closeSettingsModal }) => {
             <div className="settings-option-right">
               <SettingsSwitch
                 onChange={handleChangeContrast}
-                highContrast={highContrast}
+                checked={highContrast}
               />
             </div>
           </div>
