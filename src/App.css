@@ -22,7 +22,7 @@ nav {
   background-color: black;
   color: white;
   padding: 0 5%;
-  border-bottom: 1px solid #3A3A3D;
+  border-bottom: 1px solid #3a3a3d;
 }
 
 nav button {
@@ -115,11 +115,11 @@ nav button:hover {
 }
 
 #correct-contrast {
-  background-color: #F5793A;
+  background-color: #f5793a;
 }
 
 #almost-contrast {
-  background-color: #85BFF9;
+  background-color: #85bff9;
 }
 
 .keyboard {
@@ -246,8 +246,22 @@ nav button:hover {
   width: 34px;
 }
 
+#how-letter-orange {
+  background-color: #f5793a;
+  border: none;
+  height: 34px;
+  width: 34px;
+}
+
 #how-letter-yellow {
   background-color: #b49f39;
+  border: none;
+  height: 34px;
+  width: 34px;
+}
+
+#how-letter-blue {
+  background-color: #85bff9;
   border: none;
   height: 34px;
   width: 34px;

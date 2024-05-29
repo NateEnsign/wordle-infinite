@@ -33,8 +33,7 @@ const customStyles = {
 Modal.setAppElement("#root");
 
 const SettingsModal = ({ settingsModalOpen, closeSettingsModal }) => {
-
-    const { handleChangeContrast } = useContext(AppContext)
+  const { highContrast, handleChangeContrast } = useContext(AppContext);
 
   return (
     <Modal
@@ -53,36 +52,39 @@ const SettingsModal = ({ settingsModalOpen, closeSettingsModal }) => {
         </div>
         <div className="settings-options">
           <div className="settings-option">
-            <div settings-option-left>
+            <div className="settings-option-left">
               <div>Hard Mode</div>
               <div>Any revealed hints must be used in subsequent guesses</div>
             </div>
             <div className="settings-option-right">
-                <SettingsSwitch />
+              <SettingsSwitch />
             </div>
           </div>
           <hr />
           <div className="settings-option">
-            <div settings-option-left>
+            <div className="settings-option-left">
               <div>Dark Theme</div>
             </div>
             <div className="settings-option-right">
-                <SettingsSwitch />
+              <SettingsSwitch />
             </div>
           </div>
           <hr />
           <div className="settings-option">
-            <div settings-option-left>
+            <div className="settings-option-left">
               <div>High Contrast Mode</div>
               <div>Contrast and colorblindness improvements</div>
             </div>
             <div className="settings-option-right">
-                <SettingsSwitch onClick={ handleChangeContrast } />
+              <SettingsSwitch
+                checked={highContrast}
+                onChange={handleChangeContrast}
+              />
             </div>
           </div>
           <hr />
           <div className="settings-option">
-            <div settings-option-left>
+            <div className="settings-option-left">
               <div>Onscreen Keyboard Input Only</div>
               <div>
                 Ignore key input except from the onscreen keyboard. Most helpful
@@ -90,19 +92,19 @@ const SettingsModal = ({ settingsModalOpen, closeSettingsModal }) => {
               </div>
             </div>
             <div className="settings-option-right">
-                <SettingsSwitch />
+              <SettingsSwitch />
             </div>
           </div>
           <hr />
           <div className="settings-option">
-            <div settings-option-left>
+            <div className="settings-option-left">
               <div>Feedback</div>
             </div>
             <div className="settings-option-right">Email</div>
           </div>
           <hr />
           <div className="settings-option">
-            <div settings-option-left>
+            <div className="settings-option-left">
               <div>Report a Bug</div>
             </div>
             <div className="settings-option-right">Email</div>

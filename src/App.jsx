@@ -6,6 +6,7 @@ import { boardDefault } from "./Words";
 import { generateWordSet } from "./Words";
 import GameOver from "./components/GameOver";
 import Navbar from "./components/Navbar";
+import SettingsModal from "./components/SettingsModal";
 
 export const AppContext = createContext();
 
@@ -27,13 +28,15 @@ function App() {
   });
   const [correctWord, setCorrectWord] = useState("");
   const [highContrast, setHighContrast] = useState(() => {
-    const savedContrast = localStorage.getItem('contrastState')
+    const savedContrast = localStorage.getItem("contrastState");
     return savedContrast !== null ? JSON.parse(savedContrast) : false;
-  })
+  });
+
+  const [settingsModalOpen, setSettingsModalOpen] = useState(false);
 
   useEffect(() => {
-    localStorage.setItem('contrastState', JSON.stringify(highContrast))
-  }, [highContrast])
+    localStorage.setItem("contrastState", JSON.stringify(highContrast));
+  }, [highContrast]);
 
   useEffect(() => {
     generateWordSet().then((words) => {
@@ -42,10 +45,9 @@ function App() {
     });
   }, []);
 
-    const handleChangeContrast = () => {
-      setHighContrast(!highContrast);
-    };
-  
+  const handleChangeContrast = (event) => {
+    setHighContrast(event.target.checked);
+  };
 
   const onSelectLetter = (keyVal) => {
     if (currentAttempt.letterPos > 4) return;
@@ -124,6 +126,10 @@ function App() {
           <Board />
           {gameOver.gameOver ? <GameOver /> : <Keyboard />}
         </div>
+        <SettingsModal
+          settingsModalOpen={settingsModalOpen}
+          closeSettingsModal={() => setSettingsModalOpen(false)}
+        />
       </AppContext.Provider>
     </div>
   );
