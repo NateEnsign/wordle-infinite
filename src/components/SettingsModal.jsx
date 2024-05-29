@@ -57,7 +57,9 @@ const SettingsModal = ({ settingsModalOpen, closeSettingsModal }) => {
               <div>Any revealed hints must be used in subsequent guesses</div>
             </div>
             <div className="settings-option-right">
-              <SettingsSwitch />
+              <SettingsSwitch 
+              highContrast={highContrast}
+              />
             </div>
           </div>
           <hr />
@@ -66,7 +68,9 @@ const SettingsModal = ({ settingsModalOpen, closeSettingsModal }) => {
               <div>Dark Theme</div>
             </div>
             <div className="settings-option-right">
-              <SettingsSwitch />
+              <SettingsSwitch
+              highContrast={highContrast}
+               />
             </div>
           </div>
           <hr />
@@ -77,8 +81,8 @@ const SettingsModal = ({ settingsModalOpen, closeSettingsModal }) => {
             </div>
             <div className="settings-option-right">
               <SettingsSwitch
-                checked={highContrast}
                 onChange={handleChangeContrast}
+                highContrast={highContrast}
               />
             </div>
           </div>
@@ -92,7 +96,9 @@ const SettingsModal = ({ settingsModalOpen, closeSettingsModal }) => {
               </div>
             </div>
             <div className="settings-option-right">
-              <SettingsSwitch />
+              <SettingsSwitch 
+              highContrast={highContrast}
+              />
             </div>
           </div>
           <hr />
