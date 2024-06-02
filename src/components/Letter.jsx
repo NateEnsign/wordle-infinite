@@ -10,7 +10,9 @@ const Letter = ({ letterPos, attemptVal }) => {
     highContrast,
     setCorrectKeys,
     setAlmostKeys,
-    darkMode
+    darkMode,
+    correctKeys,
+    almostKeys,
   } = useContext(AppContext);
 
   const letter = board[attemptVal][letterPos];
@@ -83,6 +85,8 @@ const Letter = ({ letterPos, attemptVal }) => {
       setDisabledLetters((prev) => [...prev, letter]);
     }
   }, [currentAttempt.attempt]);
+
+ 
 
   const darkState = darkMode ? "dark-letter" : "light-letter"
 

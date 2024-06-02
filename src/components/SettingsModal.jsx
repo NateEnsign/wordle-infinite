@@ -5,38 +5,10 @@ import SettingsSwitch from "./SettingsSwitch";
 import { AppContext } from "../App";
 
 
-// const customStyles = {
-//   overlay: {
-//     backgroundColor: "rgba(0, 0, 0, 0.55)",
-//     overflow: "hidden",
-//   },
-//   content: {
-//     top: "50%",
-//     left: "50%",
-//     right: "auto",
-//     bottom: "auto",
-//     marginRight: "-50%",
-//     transform: "translate(-50%, -50%)",
-//     backgroundColor: "#121214",
-//     color: "#F8F8F8",
-//     border: "none",
-//     boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
-//     borderRadius: "8px",
-//     padding: "20px",
-//     height: "550px",
-//     width: "470px",
-//     maxWidth: "80%",
-//     maxHeight: "85%",
-//     overflow: "auto",
-//   },
-// };
-
-
-
 Modal.setAppElement("#root");
 
 const SettingsModal = ({ settingsModalOpen, closeSettingsModal }) => {
-  const { highContrast, handleChangeContrast, darkMode, handleChangeLightMode } = useContext(AppContext);
+  const { highContrast, handleChangeContrast, darkMode, handleChangeLightMode, handleChangeHardMode, hardMode } = useContext(AppContext);
 
   const customStyles = darkMode ? {
     overlay: {
@@ -113,6 +85,8 @@ const SettingsModal = ({ settingsModalOpen, closeSettingsModal }) => {
             <div className="settings-option-right">
               <SettingsSwitch
                 contrast={highContrast}
+                onChange={handleChangeHardMode}
+                checked={hardMode}
               />
             </div>
           </div>

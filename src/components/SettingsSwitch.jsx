@@ -4,7 +4,7 @@ import Switch from '@mui/material/Switch';
 
 const SettingsSwitch = styled((props) => (
   <Switch focusVisibleClassName=".Mui-focusVisible" disableRipple {...props} />
-))(({ theme, contrast }) => ({
+))(({ theme, contrast, lightMode }) => ({
   width: 34,
   height: 20,
   padding: 0,
@@ -45,7 +45,7 @@ const SettingsSwitch = styled((props) => (
   },
   '& .MuiSwitch-track': {
     borderRadius: 26 / 2,
-    backgroundColor: theme.palette.mode === 'light' ? '#565758' : '#538D4E',
+    backgroundColor: !lightMode ? "#878A8C" : theme.palette.mode === 'light' ? '#565758' : '#565758',
     opacity: 1,
     transition: theme.transitions.create(['background-color'], {
       duration: 500,

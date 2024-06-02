@@ -33,6 +33,11 @@ function App() {
     return savedLightMode !== null ? JSON.parse(savedLightMode) : true;
   });
 
+  const [hardMode, setHardMode] = useState(() => {
+    const savedHard = localStorage.getItem("hardState");
+    return savedHard !== null ? JSON.parse(savedHard) : false;
+  });
+
   useEffect(() => {
     localStorage.setItem("contrastState", JSON.stringify(highContrast));
   }, [highContrast]);
@@ -41,6 +46,10 @@ function App() {
     localStorage.setItem("lightState", JSON.stringify(darkMode));
   }, [darkMode]);
 
+  useEffect(() => {
+    localStorage.setItem("hardState", JSON.stringify(hardMode))
+  }, [hardMode])
+
   const handleChangeLightMode = (event) => {
     setDarkMode(event.target.checked);
   };
@@ -48,6 +57,10 @@ function App() {
   const handleChangeContrast = (event) => {
     setHighContrast(event.target.checked);
   };
+
+  const handleChangeHardMode = (event) => {
+    setHardMode(event.target.checked)
+  }
 
   useEffect(() => {
     generateWordSet().then((words) => {
@@ -80,28 +93,40 @@ function App() {
 
   const onEnter = () => {
     if (currentAttempt.letterPos !== 5) return;
-
+  
     let currWord = "";
     for (let i = 0; i < 5; i++) {
       currWord += board[currentAttempt.attempt][i];
     }
-
-    if (wordSet.has(currWord.toLowerCase())) {
-      setCurrentAttempt({ attempt: currentAttempt.attempt + 1, letterPos: 0 });
-    } else {
+  
+    if (!wordSet.has(currWord.toLowerCase())) {
       alert("Word Not On List");
+      return;
     }
-
+  
+    if (hardMode) {
+      const containsAllCorrectKeys = correctKeys.every((key) => currWord.toLowerCase().includes(key.toLowerCase()));
+      const containsAllAlmostKeys = almostKeys.every((key) => currWord.toLowerCase().includes(key.toLowerCase()));
+  
+      if (!containsAllCorrectKeys || !containsAllAlmostKeys) {
+        alert("Must use all revealed hints in guess");
+        return;
+      }
+    }
+  
+    setCurrentAttempt({ attempt: currentAttempt.attempt + 1, letterPos: 0 });
+  
     if (currWord.toLowerCase() === correctWord) {
       setGameOver({ gameOver: true, guessedWord: true });
       return;
     }
-
+  
     if (currentAttempt.attempt === 5 && wordSet.has(currWord.toLowerCase())) {
       setGameOver({ gameOver: true, guessedWord: false });
       return;
     }
   };
+  
 
   const lightState = darkMode ? "app-dark" : "app-light";
 
@@ -130,6 +155,8 @@ function App() {
           handleChangeContrast,
           handleChangeLightMode,
           darkMode,
+          hardMode,
+          handleChangeHardMode,
         }}
       >
         <Navbar />
