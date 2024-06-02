@@ -2,7 +2,6 @@ import React from "react";
 import Letter from "./Letter";
 
 const Board = () => {
-  
 
   return (
     <div className="board">

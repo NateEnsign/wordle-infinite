@@ -12,31 +12,42 @@ export const AppContext = createContext();
 
 function App() {
   const [board, setBoard] = useState(boardDefault);
-  const [currentAttempt, setCurrentAttempt] = useState({
-    attempt: 0,
-    letterPos: 0,
-  });
+  const [currentAttempt, setCurrentAttempt] = useState({ attempt: 0, letterPos: 0 });
   const [wordSet, setWordSet] = useState(new Set());
   const [disabledLetters, setDisabledLetters] = useState([]);
 
   const [correctKeys, setCorrectKeys] = useState([]);
   const [almostKeys, setAlmostKeys] = useState([]);
 
-  const [gameOver, setGameOver] = useState({
-    gameOver: false,
-    guessedWord: false,
-  });
+  const [gameOver, setGameOver] = useState({ gameOver: false, guessedWord: false });
   const [correctWord, setCorrectWord] = useState("");
+  const [settingsModalOpen, setSettingsModalOpen] = useState(false);
+
   const [highContrast, setHighContrast] = useState(() => {
     const savedContrast = localStorage.getItem("contrastState");
     return savedContrast !== null ? JSON.parse(savedContrast) : false;
   });
 
-  const [settingsModalOpen, setSettingsModalOpen] = useState(false);
+  const [darkMode, setDarkMode] = useState(() => {
+    const savedLightMode = localStorage.getItem("lightState");
+    return savedLightMode !== null ? JSON.parse(savedLightMode) : true;
+  });
 
   useEffect(() => {
     localStorage.setItem("contrastState", JSON.stringify(highContrast));
   }, [highContrast]);
+
+  useEffect(() => {
+    localStorage.setItem("lightState", JSON.stringify(darkMode));
+  }, [darkMode]);
+
+  const handleChangeLightMode = (event) => {
+    setDarkMode(event.target.checked);
+  };
+
+  const handleChangeContrast = (event) => {
+    setHighContrast(event.target.checked);
+  };
 
   useEffect(() => {
     generateWordSet().then((words) => {
@@ -44,10 +55,6 @@ function App() {
       setCorrectWord(words.todaysWord);
     });
   }, []);
-
-  const handleChangeContrast = (event) => {
-    setHighContrast(event.target.checked);
-  };
 
   const onSelectLetter = (keyVal) => {
     if (currentAttempt.letterPos > 4) return;
@@ -96,8 +103,10 @@ function App() {
     }
   };
 
+  const lightState = darkMode ? "app-dark" : "app-light";
+
   return (
-    <div className="App">
+    <div className={lightState}>
       <AppContext.Provider
         value={{
           board,
@@ -119,6 +128,8 @@ function App() {
           almostKeys,
           setAlmostKeys,
           handleChangeContrast,
+          handleChangeLightMode,
+          darkMode,
         }}
       >
         <Navbar />
@@ -136,3 +147,4 @@ function App() {
 }
 
 export default App;
+

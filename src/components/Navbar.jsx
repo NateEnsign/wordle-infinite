@@ -1,14 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { CircleHelp } from "lucide-react";
 import { BarChart2 } from "lucide-react";
 import { Settings } from "lucide-react";
 import QuestionModal from "./QuestionModal";
 import SettingsModal from "./SettingsModal";
+import { AppContext } from "../App";
 
 
 const Navbar = () => {
   const [questionModalOpen, setQuestionModalOpen] = useState(false);
   const [settingsModalOpen, setSettingsModalOpen] = useState(false);
+
+  const { darkMode } = useContext(AppContext);
 
   const openSettingsModal = () => {
     setSettingsModalOpen(true);
@@ -30,8 +33,10 @@ const Navbar = () => {
     document.body.style.overflow = "auto";
   };
 
+  const navState = darkMode ? "nav-dark" : "nav-light"
+
   return (
-    <nav>
+    <nav className={navState}>
       <div className="nav-left">
         <button onClick={openQuestionModal}>
           <CircleHelp className="nav-icon" />

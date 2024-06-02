@@ -10,6 +10,7 @@ const Letter = ({ letterPos, attemptVal }) => {
     highContrast,
     setCorrectKeys,
     setAlmostKeys,
+    darkMode
   } = useContext(AppContext);
 
   const letter = board[attemptVal][letterPos];
@@ -53,15 +54,21 @@ const Letter = ({ letterPos, attemptVal }) => {
 
   const letterState =
     currentAttempt.attempt > attemptVal &&
-    (isCorrect && !highContrast
-      ? "correct"
-      : isAlmost && !highContrast
-      ? "almost"
+    (isCorrect && !highContrast && darkMode
+      ? "correct-dark"
+      : isCorrect && !highContrast && !darkMode
+      ? "correct-light"
+      : isAlmost && !highContrast && darkMode
+      ? "almost-dark"
+      : isAlmost && !highContrast && !darkMode
+      ? "almost-light"
       : isCorrect && highContrast
       ? "correct-contrast"
       : isAlmost && highContrast
       ? "almost-contrast"
-      : "error");
+      : !isCorrect && ! isAlmost && darkMode
+      ? "error-dark"
+      : "error-light");
 
   const correct = correctWord.toUpperCase()[letterPos] === letter;
   const almost =
@@ -77,8 +84,10 @@ const Letter = ({ letterPos, attemptVal }) => {
     }
   }, [currentAttempt.attempt]);
 
+  const darkState = darkMode ? "dark-letter" : "light-letter"
+
   return (
-    <div className="letter" id={letterState}>
+    <div className={darkState} id={letterState}>
       {letter}
     </div>
   );

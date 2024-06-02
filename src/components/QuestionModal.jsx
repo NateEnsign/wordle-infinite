@@ -3,46 +3,75 @@ import Modal from "react-modal";
 import { X } from "lucide-react";
 import { AppContext } from "../App";
 
-const customStyles = {
-  overlay: {
-    backgroundColor: "rgba(0, 0, 0, 0.55)",
-    overflow: "hidden",
-  },
-  content: {
-    top: "50%",
-    left: "50%",
-    right: "auto",
-    bottom: "auto",
-    marginRight: "-50%",
-    transform: "translate(-50%, -50%)",
-    backgroundColor: "#121214",
-    color: "#F8F8F8",
-    border: "none",
-    boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
-    borderRadius: "8px",
-    padding: "20px",
-    height: "550px",
-    width: "470px",
-    maxWidth: "80%",
-    maxHeight: "85%",
-    overflow: "auto",
-  },
-};
+
 
 Modal.setAppElement("#root");
 
 const QuestionModal = ({ questionModalOpen, closeQuestionModal }) => {
-  const { highContrast } = useContext(AppContext)
+  const { highContrast, darkMode } = useContext(AppContext)
 
-  const correctLetter = !highContrast ? "how-letter-green" : "how-letter-orange";
+  const correctLetter = !highContrast && !darkMode ? "how-letter-green-light" : !highContrast ? "how-letter-green-dark" : "how-letter-orange";
 
-  const almostLetter = !highContrast ? "how-letter-yellow" : "how-letter-blue"
+  const almostLetter = !highContrast && !darkMode ? "how-letter-yellow-light" : !highContrast ? "how-letter-yellow-dark" : "how-letter-blue"
+
+  const nonLetter = !darkMode ? "how-letter-grey-light" : "how-letter-grey-dark"
+
+  const customStyles = darkMode ? {
+    overlay: {
+      backgroundColor: "rgba(0, 0, 0, 0.55)",
+      overflow: "hidden",
+    },
+    content: {
+      top: "50%",
+      left: "50%",
+      right: "auto",
+      bottom: "auto",
+      marginRight: "-50%",
+      transform: "translate(-50%, -50%)",
+      backgroundColor: "#121214",
+      color: "#F8F8F8",
+      border: "none",
+      boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
+      borderRadius: "8px",
+      padding: "20px",
+      height: "550px",
+      width: "470px",
+      maxWidth: "80%",
+      maxHeight: "85%",
+      overflow: "auto",
+    },
+  } : {
+    overlay: {
+      backgroundColor: "rgba(0, 0, 0, 0.55)",
+      overflow: "hidden",
+    },
+    content: {
+      top: "50%",
+      left: "50%",
+      right: "auto",
+      bottom: "auto",
+      marginRight: "-50%",
+      transform: "translate(-50%, -50%)",
+      backgroundColor: "white",
+      color: "#010101",
+      border: "none",
+      boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
+      borderRadius: "8px",
+      padding: "20px",
+      height: "550px",
+      width: "470px",
+      maxWidth: "80%",
+      maxHeight: "85%",
+      overflow: "auto",
+    },
+  }
 
   return (
     <Modal
       isOpen={questionModalOpen}
       onRequestClose={closeQuestionModal}
       style={customStyles}
+    
     >
       <div className="how-modal-body">
         <div className="how-btn-container">
@@ -99,7 +128,7 @@ const QuestionModal = ({ questionModalOpen, closeQuestionModal }) => {
             <span className="how-letter">V</span>
             <span className="how-letter">A</span>
             <span className="how-letter">G</span>
-            <span className="how-letter" id="how-letter-grey">
+            <span className="how-letter" id={nonLetter}>
               U
             </span>
             <span className="how-letter">E</span>
@@ -115,3 +144,4 @@ const QuestionModal = ({ questionModalOpen, closeQuestionModal }) => {
 };
 
 export default QuestionModal;
+
