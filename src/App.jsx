@@ -38,6 +38,11 @@ function App() {
     return savedHard !== null ? JSON.parse(savedHard) : false;
   });
 
+  const [onScreenOnly, setOnScreenOnly] = useState(() => {
+    const savedKeyboardMode = localStorage.getItem("keyboardState");
+    return savedKeyboardMode !== null ? JSON.parse(savedKeyboardMode) : false;
+  });
+
   useEffect(() => {
     localStorage.setItem("contrastState", JSON.stringify(highContrast));
   }, [highContrast]);
@@ -50,6 +55,10 @@ function App() {
     localStorage.setItem("hardState", JSON.stringify(hardMode))
   }, [hardMode])
 
+  useEffect(() => {
+    localStorage.setItem("keyboardState", JSON.stringify(onScreenOnly))
+  }, [onScreenOnly])
+
   const handleChangeLightMode = (event) => {
     setDarkMode(event.target.checked);
   };
@@ -60,6 +69,10 @@ function App() {
 
   const handleChangeHardMode = (event) => {
     setHardMode(event.target.checked)
+  }
+
+  const handleChangeKeyboardMode = (event) => {
+    setOnScreenOnly(event.target.checked)
   }
 
   useEffect(() => {
@@ -157,6 +170,9 @@ function App() {
           darkMode,
           hardMode,
           handleChangeHardMode,
+          handleChangeKeyboardMode,
+          onScreenOnly,
+
         }}
       >
         <Navbar />

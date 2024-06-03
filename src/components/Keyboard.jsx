@@ -1,16 +1,21 @@
 import React, { useEffect, useCallback, useContext } from "react";
 import Key from "./Key";
 import { AppContext } from "../App";
+import { Delete } from 'lucide-react';
 
 const Keyboard = () => {
   const keys1 = ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"];
   const keys2 = ["A", "S", "D", "F", "G", "H", "J", "K", "L"];
   const keys3 = ["Z", "X", "C", "V", "B", "N", "M"];
 
-  const { onEnter, onDelete, onSelectLetter, disabledLetters, correctKeys, almostKeys, } =
+  const { onEnter, onDelete, onSelectLetter, disabledLetters, correctKeys, almostKeys, onScreenOnly } =
     useContext(AppContext);
 
   const handleKeyboard = useCallback((event) => {
+    if (onScreenOnly){
+      alert('Keyboard is disabled, please use on screen input. You can enable the use of keyboard in settings.')
+      return;
+    }
     if (event.key === "Enter") {
       onEnter();
     } else if (event.key === "Backspace") {
@@ -83,7 +88,7 @@ const Keyboard = () => {
             />
           );
         })}
-        <Key keyVal={"DELETE"} bigKey />
+        <Key keyVal={<Delete />} bigKey />
       </div>
     </div>
   );

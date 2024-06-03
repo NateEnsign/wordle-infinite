@@ -236,7 +236,9 @@ nav button:hover {
 }
 
 #big {
-  width: 100px;
+  width:70px;
+  font-size: 12px;
+  font-weight: 600;
 }
 #disabled-dark {
   background-color: #3a393c;
