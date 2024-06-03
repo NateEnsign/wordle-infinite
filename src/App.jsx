@@ -68,6 +68,10 @@ function App() {
   };
 
   const handleChangeHardMode = (event) => {
+    if (currentAttempt.attempt > 0){
+      alert('Can only change at start of round')
+      return
+    }
     setHardMode(event.target.checked)
   }
 
