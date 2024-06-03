@@ -14,6 +14,7 @@ const SettingsModal = ({ settingsModalOpen, closeSettingsModal }) => {
     handleChangeLightMode,
     handleChangeHardMode,
     hardMode,
+    disabledHard,
     handleChangeKeyboardMode,
     onScreenOnly,
   } = useContext(AppContext);
@@ -98,6 +99,7 @@ const SettingsModal = ({ settingsModalOpen, closeSettingsModal }) => {
                 contrast={highContrast}
                 onChange={handleChangeHardMode}
                 checked={hardMode}
+                disabledHard={disabledHard}
               />
             </div>
           </div>

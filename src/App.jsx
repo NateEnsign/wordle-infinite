@@ -7,19 +7,27 @@ import { generateWordSet } from "./Words";
 import GameOver from "./components/GameOver";
 import Navbar from "./components/Navbar";
 import SettingsModal from "./components/SettingsModal";
+import Swal from "sweetalert2";
 
 export const AppContext = createContext();
 
 function App() {
   const [board, setBoard] = useState(boardDefault);
-  const [currentAttempt, setCurrentAttempt] = useState({ attempt: 0, letterPos: 0 });
+  const [currentAttempt, setCurrentAttempt] = useState({
+    attempt: 0,
+    letterPos: 0,
+  });
   const [wordSet, setWordSet] = useState(new Set());
   const [disabledLetters, setDisabledLetters] = useState([]);
 
   const [correctKeys, setCorrectKeys] = useState([]);
   const [almostKeys, setAlmostKeys] = useState([]);
+  const [disabledHard, setDisabledHard] = useState(false)
 
-  const [gameOver, setGameOver] = useState({ gameOver: false, guessedWord: false });
+  const [gameOver, setGameOver] = useState({
+    gameOver: false,
+    guessedWord: false,
+  });
   const [correctWord, setCorrectWord] = useState("");
   const [settingsModalOpen, setSettingsModalOpen] = useState(false);
 
@@ -52,12 +60,12 @@ function App() {
   }, [darkMode]);
 
   useEffect(() => {
-    localStorage.setItem("hardState", JSON.stringify(hardMode))
-  }, [hardMode])
+    localStorage.setItem("hardState", JSON.stringify(hardMode));
+  }, [hardMode]);
 
   useEffect(() => {
-    localStorage.setItem("keyboardState", JSON.stringify(onScreenOnly))
-  }, [onScreenOnly])
+    localStorage.setItem("keyboardState", JSON.stringify(onScreenOnly));
+  }, [onScreenOnly]);
 
   const handleChangeLightMode = (event) => {
     setDarkMode(event.target.checked);
@@ -68,16 +76,30 @@ function App() {
   };
 
   const handleChangeHardMode = (event) => {
-    if (currentAttempt.attempt > 0){
-      alert('Can only change at start of round')
-      return
+    if (currentAttempt.attempt > 0) {
+      Swal.fire({
+        text: "Can only change at start of round",
+        showConfirmButton: null,
+        timer: 1500,
+        backdrop: false,
+        width: "300px",
+        position: 'top',
+        padding: 0,
+        willOpen: () => {
+          const swalPopup = document.querySelector('.swal2-popup');
+          if (swalPopup) {
+            swalPopup.style.top = '50px';
+          }
+        }
+      });
+      return;
     }
-    setHardMode(event.target.checked)
-  }
+    setHardMode(event.target.checked);
+  };
 
   const handleChangeKeyboardMode = (event) => {
-    setOnScreenOnly(event.target.checked)
-  }
+    setOnScreenOnly(event.target.checked);
+  };
 
   useEffect(() => {
     generateWordSet().then((words) => {
@@ -110,40 +132,72 @@ function App() {
 
   const onEnter = () => {
     if (currentAttempt.letterPos !== 5) return;
-  
+
     let currWord = "";
     for (let i = 0; i < 5; i++) {
       currWord += board[currentAttempt.attempt][i];
     }
-  
+
     if (!wordSet.has(currWord.toLowerCase())) {
-      alert("Word Not On List");
+      Swal.fire({
+        text: "Word not on list",
+        showConfirmButton: null,
+        timer: 1000,
+        backdrop: false,
+        width: "200px",
+        position: 'top',
+        padding: 0,
+        willOpen: () => {
+          const swalPopup = document.querySelector('.swal2-popup');
+          if (swalPopup) {
+            swalPopup.style.top = '50px';
+          }
+        }
+      });
       return;
     }
-  
+
     if (hardMode) {
-      const containsAllCorrectKeys = correctKeys.every((key) => currWord.toLowerCase().includes(key.toLowerCase()));
-      const containsAllAlmostKeys = almostKeys.every((key) => currWord.toLowerCase().includes(key.toLowerCase()));
-  
+      const containsAllCorrectKeys = correctKeys.every((key) =>
+        currWord.toLowerCase().includes(key.toLowerCase())
+      );
+      const containsAllAlmostKeys = almostKeys.every((key) =>
+        currWord.toLowerCase().includes(key.toLowerCase())
+      );
+
       if (!containsAllCorrectKeys || !containsAllAlmostKeys) {
-        alert("Must use all revealed hints in guess");
+        Swal.fire({
+          text: "Must use all revealed hints in guess",
+          showConfirmButton: null,
+          timer: 1500,
+          backdrop: false,
+          width: "300px",
+          position: 'top',
+          padding: 0,
+          willOpen: () => {
+            const swalPopup = document.querySelector('.swal2-popup');
+            if (swalPopup) {
+              swalPopup.style.top = '50px';
+            }
+          }
+        });
         return;
       }
     }
-  
+
     setCurrentAttempt({ attempt: currentAttempt.attempt + 1, letterPos: 0 });
-  
+    setDisabledHard(true)
+
     if (currWord.toLowerCase() === correctWord) {
       setGameOver({ gameOver: true, guessedWord: true });
       return;
     }
-  
+
     if (currentAttempt.attempt === 5 && wordSet.has(currWord.toLowerCase())) {
       setGameOver({ gameOver: true, guessedWord: false });
       return;
     }
   };
-  
 
   const lightState = darkMode ? "app-dark" : "app-light";
 
@@ -176,7 +230,7 @@ function App() {
           handleChangeHardMode,
           handleChangeKeyboardMode,
           onScreenOnly,
-
+          disabledHard,
         }}
       >
         <Navbar />
@@ -194,4 +248,3 @@ function App() {
 }
 
 export default App;
-

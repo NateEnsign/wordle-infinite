@@ -2,6 +2,7 @@ import React, { useEffect, useCallback, useContext } from "react";
 import Key from "./Key";
 import { AppContext } from "../App";
 import { Delete } from 'lucide-react';
+import Swal from "sweetalert2";
 
 const Keyboard = () => {
   const keys1 = ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"];
@@ -13,7 +14,21 @@ const Keyboard = () => {
 
   const handleKeyboard = useCallback((event) => {
     if (onScreenOnly){
-      alert('Keyboard is disabled, please use on screen input. You can enable the use of keyboard in settings.')
+      Swal.fire({
+        text: "Keyboard is disabled, please use on screen input. You can enable the use of keyboard in settings",
+        showConfirmButton: null,
+        timer: 3600,
+        backdrop: false,
+        width: "500px",
+        position: 'top',
+        padding: 0,
+        willOpen: () => {
+          const swalPopup = document.querySelector('.swal2-popup');
+          if (swalPopup) {
+            swalPopup.style.top = '50px';
+          }
+        }
+      });
       return;
     }
     if (event.key === "Enter") {
