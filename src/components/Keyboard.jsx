@@ -88,7 +88,7 @@ const Keyboard = () => {
             />
           );
         })}
-        <Key keyVal={<Delete />} bigKey />
+        <Key keyVal={<Delete />} bigKey id='Delete' />
       </div>
     </div>
   );
