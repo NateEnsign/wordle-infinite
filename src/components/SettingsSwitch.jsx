@@ -46,7 +46,7 @@ const SettingsSwitch = styled((props) => (
   '& .MuiSwitch-track': {
     borderRadius: 26 / 2,
     backgroundColor: !lightMode ? "#878A8C" : theme.palette.mode === 'light' ? '#565758' : '#565758',
-    opacity: 1,
+    opacity: disabledHard ? .5 : 1,
     transition: theme.transitions.create(['background-color'], {
       duration: 500,
     }),
