@@ -411,3 +411,12 @@ nav button:hover {
   font-size: 13px;
   color: #B6B6B6;
 }
+
+.settings-option-email {
+  border-bottom: 1px solid;
+}
+
+.email-btn {
+  all: unset;
+  cursor: pointer;
+}

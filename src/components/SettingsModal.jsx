@@ -19,6 +19,22 @@ const SettingsModal = ({ settingsModalOpen, closeSettingsModal }) => {
     onScreenOnly,
   } = useContext(AppContext);
 
+  const companyEmail = "nateensign@gmail.com";
+  const feedbackFeature = "Wordle Feedback";
+  const bugFeature = "Wordle Bug";
+
+  const handleFeedbackEmailClick = () => {
+    window.location.href = `mailto:${companyEmail}?subject=${encodeURIComponent(
+      feedbackFeature
+    )}`;
+  };
+
+  const handleBugEmailClick = () => {
+    window.location.href = `mailto:${companyEmail}?subject=${encodeURIComponent(
+      bugFeature
+    )}`;
+  };
+
   const customStyles = darkMode
     ? {
         overlay: {
@@ -157,14 +173,18 @@ const SettingsModal = ({ settingsModalOpen, closeSettingsModal }) => {
             <div className="settings-option-left">
               <div className="settings-option-title">Feedback</div>
             </div>
-            <div className="settings-option-right">Email</div>
+            <button className="email-btn" onClick={handleFeedbackEmailClick}>
+              <div className="settings-option-email">Email</div>
+            </button>
           </div>
           <hr />
           <div className="settings-option">
             <div className="settings-option-left">
               <div className="settings-option-title">Report a Bug</div>
             </div>
-            <div className="settings-option-right">Email</div>
+            <button className="email-btn" onClick={handleBugEmailClick}>
+              <div className="settings-option-email">Email</div>
+            </button>
           </div>
           <hr />
         </div>
