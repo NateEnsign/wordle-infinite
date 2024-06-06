@@ -420,3 +420,12 @@ nav button:hover {
   all: unset;
   cursor: pointer;
 }
+
+.popup-container {
+  display: flex;
+  align-items: center;
+}
+
+.popup-text {
+  height: 75%;
+}

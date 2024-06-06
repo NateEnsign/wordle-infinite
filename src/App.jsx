@@ -4,7 +4,7 @@ import Board from "./components/Board";
 import Keyboard from "./components/Keyboard";
 import { boardDefault } from "./Words";
 import { generateWordSet } from "./Words";
-import GameOver from "./components/GameOver";
+// import GameOver from "./components/GameOver";
 import Navbar from "./components/Navbar";
 import SettingsModal from "./components/SettingsModal";
 import Swal from "sweetalert2";
@@ -22,12 +22,12 @@ function App() {
 
   const [correctKeys, setCorrectKeys] = useState([]);
   const [almostKeys, setAlmostKeys] = useState([]);
-  const [disabledHard, setDisabledHard] = useState(false)
+  const [disabledHard, setDisabledHard] = useState(false);
 
-  const [gameOver, setGameOver] = useState({
-    gameOver: false,
-    guessedWord: false,
-  });
+  // const [gameOver, setGameOver] = useState({
+  //   gameOver: false,
+  //   guessedWord: false,
+  // });
   const [correctWord, setCorrectWord] = useState("");
   const [settingsModalOpen, setSettingsModalOpen] = useState(false);
 
@@ -83,14 +83,18 @@ function App() {
         timer: 1500,
         backdrop: false,
         width: "300px",
-        position: 'top',
-        padding: 0,
+        paddingTop: 0,
+        paddingBottom: 0,
+        marginTop: 0,
+        MarginBottom: 0,
+        position: "top",
+
         willOpen: () => {
-          const swalPopup = document.querySelector('.swal2-popup');
+          const swalPopup = document.querySelector(".swal2-popup");
           if (swalPopup) {
-            swalPopup.style.top = '50px';
+            swalPopup.style.top = "50px";
           }
-        }
+        },
       });
       return;
     }
@@ -144,15 +148,20 @@ function App() {
         showConfirmButton: null,
         timer: 1000,
         backdrop: false,
-        width: "200px",
-        position: 'top',
+        width: "190px",
+        position: "top",
         padding: 0,
+        customClass: {
+          popup: 'popup-container',
+          htmlContainer: 'popup-text'
+        },
+
         willOpen: () => {
-          const swalPopup = document.querySelector('.swal2-popup');
+          const swalPopup = document.querySelector(".swal2-popup");
           if (swalPopup) {
-            swalPopup.style.top = '50px';
+            swalPopup.style.top = "50px";
           }
-        }
+        },
       });
       return;
     }
@@ -172,30 +181,74 @@ function App() {
           timer: 1500,
           backdrop: false,
           width: "300px",
-          position: 'top',
+          position: "top",
           padding: 0,
+          customClass: {
+            popup: 'popup-container',
+            htmlContainer: 'popup-text'
+          },
           willOpen: () => {
-            const swalPopup = document.querySelector('.swal2-popup');
+            const swalPopup = document.querySelector(".swal2-popup");
             if (swalPopup) {
-              swalPopup.style.top = '50px';
+              swalPopup.style.top = "50px";
             }
-          }
+          },
         });
         return;
       }
     }
 
     setCurrentAttempt({ attempt: currentAttempt.attempt + 1, letterPos: 0 });
-    setDisabledHard(true)
+    setDisabledHard(true);
 
     if (currWord.toLowerCase() === correctWord) {
-      setGameOver({ gameOver: true, guessedWord: true });
+      Swal.fire({
+        text: "Teriffic!",
+        showConfirmButton: null,
+        // timer: 1500,
+        backdrop: false,
+        width: "115px",
+        position: "top",
+        padding: 0,
+        customClass: {
+          popup: 'popup-container',
+          htmlContainer: 'popup-text'
+        },
+        willOpen: () => {
+          const swalPopup = document.querySelector(".swal2-popup");
+          if (swalPopup) {
+            swalPopup.style.top = "50px";
+          }
+        },
+      });
       return;
+      // setGameOver({ gameOver: true, guessedWord: true });
+      // return;
     }
 
     if (currentAttempt.attempt === 5 && wordSet.has(currWord.toLowerCase())) {
-      setGameOver({ gameOver: true, guessedWord: false });
+      Swal.fire({
+        text: `${correctWord}`.toUpperCase(),
+        showConfirmButton: null,
+        // timer: 1500,
+        backdrop: false,
+        width: 'auto',
+        position: "top",
+        padding: 0,
+        customClass: {
+          popup: 'popup-container',
+          htmlContainer: 'popup-text'
+        },
+        willOpen: () => {
+          const swalPopup = document.querySelector(".swal2-popup");
+          if (swalPopup) {
+            swalPopup.style.top = "50px";
+          }
+        },
+      });
       return;
+      // setGameOver({ gameOver: true, guessedWord: false });
+      // return;
     }
   };
 
@@ -215,8 +268,8 @@ function App() {
           correctWord,
           disabledLetters,
           setDisabledLetters,
-          gameOver,
-          setGameOver,
+          // gameOver,
+          // setGameOver,
           highContrast,
           setHighContrast,
           correctKeys,
@@ -236,7 +289,7 @@ function App() {
         <Navbar />
         <div className="game">
           <Board />
-          {gameOver.gameOver ? <GameOver /> : <Keyboard />}
+          <Keyboard />
         </div>
         <SettingsModal
           settingsModalOpen={settingsModalOpen}
