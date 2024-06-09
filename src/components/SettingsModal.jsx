@@ -40,6 +40,7 @@ const SettingsModal = ({ settingsModalOpen, closeSettingsModal }) => {
         overlay: {
           backgroundColor: "rgba(0, 0, 0, 0.55)",
           overflow: "hidden",
+          zIndex: '1080',
         },
         content: {
           top: "50%",
@@ -65,6 +66,7 @@ const SettingsModal = ({ settingsModalOpen, closeSettingsModal }) => {
         overlay: {
           backgroundColor: "rgba(0, 0, 0, 0.55)",
           overflow: "hidden",
+          zIndex: '1080',
         },
         content: {
           top: "50%",

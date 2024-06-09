@@ -16,7 +16,6 @@ const Letter = ({ letterPos, attemptVal }) => {
   } = useContext(AppContext);
 
   const letter = board[attemptVal][letterPos];
-
   const correctWordArray = correctWord.toUpperCase().split("");
 
   const correctWordCount = correctWordArray.reduce((acc, char) => {
@@ -25,25 +24,33 @@ const Letter = ({ letterPos, attemptVal }) => {
   }, {});
 
   const guessCount = {};
+  const almostCount = {};
 
   let isCorrect = false;
   let isAlmost = false;
 
+  // First pass: Mark correct letters and count them
   for (let i = 0; i < 5; i++) {
-    if (board[attemptVal][i] === correctWordArray[i]) {
-      const guessedLetter = board[attemptVal][i];
+    const guessedLetter = board[attemptVal][i];
+    if (guessedLetter === correctWordArray[i]) {
       guessCount[guessedLetter] = (guessCount[guessedLetter] || 0) + 1;
     }
   }
 
+  // Second pass: Mark almost letters
   for (let i = 0; i < 5; i++) {
     const guessedLetter = board[attemptVal][i];
-    if (!isCorrect && correctWordArray.includes(guessedLetter)) {
-      const totalCorrectAndAlmost = guessCount[guessedLetter] || 0;
+    if (!guessCount[guessedLetter]) {
+      guessCount[guessedLetter] = 0;
+    }
+    if (correctWordArray.includes(guessedLetter)) {
+      const totalCorrectAndAlmost = (guessCount[guessedLetter] || 0) + (almostCount[guessedLetter] || 0);
       if (totalCorrectAndAlmost < correctWordCount[guessedLetter]) {
-        guessCount[guessedLetter] = totalCorrectAndAlmost + 1;
-        if (i === letterPos) {
-          isAlmost = true;
+        if (guessedLetter !== correctWordArray[i]) {
+          almostCount[guessedLetter] = (almostCount[guessedLetter] || 0) + 1;
+          if (i === letterPos) {
+            isAlmost = true;
+          }
         }
       }
     }
@@ -68,7 +75,7 @@ const Letter = ({ letterPos, attemptVal }) => {
       ? "correct-contrast"
       : isAlmost && highContrast
       ? "almost-contrast"
-      : !isCorrect && ! isAlmost && darkMode
+      : !isCorrect && !isAlmost && darkMode
       ? "error-dark"
       : "error-light");
 
@@ -86,9 +93,7 @@ const Letter = ({ letterPos, attemptVal }) => {
     }
   }, [currentAttempt.attempt]);
 
- 
-
-  const darkState = darkMode ? "dark-letter" : "light-letter"
+  const darkState = darkMode ? "dark-letter" : "light-letter";
 
   return (
     <div className={darkState} id={letterState}>
@@ -98,3 +103,5 @@ const Letter = ({ letterPos, attemptVal }) => {
 };
 
 export default Letter;
+
+

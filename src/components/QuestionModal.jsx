@@ -20,6 +20,7 @@ const QuestionModal = ({ questionModalOpen, closeQuestionModal }) => {
     overlay: {
       backgroundColor: "rgba(0, 0, 0, 0.55)",
       overflow: "hidden",
+      zIndex: '1080',
     },
     content: {
       top: "50%",
@@ -39,11 +40,13 @@ const QuestionModal = ({ questionModalOpen, closeQuestionModal }) => {
       maxWidth: "80%",
       maxHeight: "85%",
       overflow: "auto",
+      // zIndex: '1080',
     },
   } : {
     overlay: {
       backgroundColor: "rgba(0, 0, 0, 0.55)",
       overflow: "hidden",
+      zIndex: '1080',
     },
     content: {
       top: "50%",
@@ -63,6 +66,7 @@ const QuestionModal = ({ questionModalOpen, closeQuestionModal }) => {
       maxWidth: "80%",
       maxHeight: "85%",
       overflow: "auto",
+      // zIndex: '1080',
     },
   }
 
