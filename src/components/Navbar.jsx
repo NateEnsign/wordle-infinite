@@ -64,6 +64,9 @@ const Navbar = () => {
           <button>
             <h3>Login</h3>
           </button>
+          <button>
+            <h3>Test</h3>
+          </button>
       </div>
     </nav>
   );
