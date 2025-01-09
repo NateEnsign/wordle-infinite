@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { AppContext } from "../App";
 
 const Letter = ({ letterPos, attemptVal }) => {
@@ -14,6 +14,8 @@ const Letter = ({ letterPos, attemptVal }) => {
     correctKeys,
     almostKeys,
   } = useContext(AppContext);
+
+  const [isPulsing, setIsPulsing] = useState(false);
 
   const letter = board[attemptVal][letterPos];
   const correctWordArray = correctWord.toUpperCase().split("");
@@ -83,6 +85,14 @@ const Letter = ({ letterPos, attemptVal }) => {
   const almost =
     !correct && letter !== "" && correctWord.toUpperCase().includes(letter);
 
+    useEffect(() => {
+      if (letter !== "") {
+        setIsPulsing(true);
+        const timer = setTimeout(() => setIsPulsing(false), 300); // Duration of the animation
+        return () => clearTimeout(timer);
+      }
+    }, [letter]);
+
   useEffect(() => {
     if (letter !== "" && correct) {
       setCorrectKeys((prev) => [...prev, letter]);
@@ -96,7 +106,7 @@ const Letter = ({ letterPos, attemptVal }) => {
   const darkState = darkMode ? "dark-letter" : "light-letter";
 
   return (
-    <div className={darkState} id={letterState}>
+    <div className={`${darkState} ${isPulsing ? "pulsing-border" : ""}`} id={letterState}>
       {letter}
     </div>
   );

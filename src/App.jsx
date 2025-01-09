@@ -1,4 +1,5 @@
 import React, { useState, createContext, useEffect } from "react";
+
 import "./App.css";
 import Board from "./components/Board";
 import Keyboard from "./components/Keyboard";
@@ -153,8 +154,8 @@ function App() {
         position: "top",
         padding: 0,
         customClass: {
-          popup: 'popup-container',
-          htmlContainer: 'popup-text'
+          popup: "popup-container",
+          htmlContainer: "popup-text",
         },
 
         willOpen: () => {
@@ -185,8 +186,8 @@ function App() {
           position: "top",
           padding: 0,
           customClass: {
-            popup: 'popup-container',
-            htmlContainer: 'popup-text'
+            popup: "popup-container",
+            htmlContainer: "popup-text",
           },
           willOpen: () => {
             const swalPopup = document.querySelector(".swal2-popup");
@@ -212,8 +213,8 @@ function App() {
         position: "top",
         padding: 0,
         customClass: {
-          popup: 'popup-container',
-          htmlContainer: 'popup-text'
+          popup: "popup-container",
+          htmlContainer: "popup-text",
         },
         willOpen: () => {
           const swalPopup = document.querySelector(".swal2-popup");
@@ -233,12 +234,12 @@ function App() {
         showConfirmButton: null,
         // timer: 1500,
         backdrop: false,
-        width: 'auto',
+        width: "auto",
         position: "top",
         padding: 0,
         customClass: {
-          popup: 'popup-container',
-          htmlContainer: 'popup-text'
+          popup: "popup-container",
+          htmlContainer: "popup-text",
         },
         willOpen: () => {
           const swalPopup = document.querySelector(".swal2-popup");
@@ -292,10 +293,10 @@ function App() {
           <Board />
           <Keyboard />
         </div>
-        <SettingsModal
+        {/* <SettingsModal
           settingsModalOpen={settingsModalOpen}
           closeSettingsModal={() => setSettingsModalOpen(false)}
-        />
+        /> */}
       </AppContext.Provider>
     </div>
   );
