@@ -1,6 +1,8 @@
 import React from "react";
 import Letter from "./Letter";
 
+import './Board.css';
+
 const Board = () => {
 
   return (

@@ -1,6 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AppContext } from "../App";
 
+import './Letter.css';
+
 const Letter = ({ letterPos, attemptVal }) => {
   const {
     board,

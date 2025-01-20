@@ -3,6 +3,8 @@ import Modal from "react-modal";
 import { X } from "lucide-react";
 import { AppContext } from "../App";
 
+import './QuestionModal.css';
+
 
 
 Modal.setAppElement("#root");

@@ -23,7 +23,7 @@ body {
   margin: 0;
 }
 
-.nav-dark {
+/* .nav-dark {
   height: 80px;
   display: flex;
   align-items: center;
@@ -80,7 +80,7 @@ nav button:hover {
   flex: 1;
   display: flex;
   justify-content: flex-end;
-}
+} */
 
 
 .game {
@@ -92,7 +92,7 @@ nav button:hover {
   flex-direction: column;
 }
 
-.board {
+/* .board {
   width: 316.66px;
   height: 380px;
   display: flex;
@@ -104,9 +104,9 @@ nav button:hover {
   display: flex;
   flex-direction: row;
   margin: px 0; 
-}
+} */
 
-.dark-letter,
+/* .dark-letter,
 .light-letter {
   flex-grow: 1; 
   flex-basis: 0; 
@@ -194,9 +194,9 @@ nav button:hover {
   background-color: #85bff9;
   border: none;
   color: white;
-}
+} */
 
-.keyboard {
+/* .keyboard {
   width: 700px;
   height: 250px;
   margin-top: 10px;
@@ -223,9 +223,9 @@ nav button:hover {
   flex-direction: row;
   justify-content: center;
   margin: 5px;
-}
+} */
 
-.key-dark {
+/* .key-dark {
   width: 50px;
   height: 70px;
   margin: 5px;
@@ -251,27 +251,28 @@ nav button:hover {
   background-color: #D3D6DA;
   color: black;
   cursor: pointer;
-}
+} */
 
-#big {
+/* #big {
   width:70px;
   font-size: 12px;
   font-weight: 600;
-}
-#disabled-dark {
+} */
+
+/* #disabled-dark {
   background-color: #3a393c;
 }
 
 #disabled-light {
   background-color: #787C7E;
   color: white;
-}
+} */
 
 .GameOver {
   padding: 80px;
 }
 
-.how-modal-body {
+/* .how-modal-body {
   padding-left: 30px;
 }
 
@@ -396,9 +397,9 @@ nav button:hover {
 
 .how-example {
   margin-bottom: 20px;
-}
+} */
 
-.settings-head {
+/* .settings-head {
   display: flex;
 }
 
@@ -446,5 +447,5 @@ nav button:hover {
 
 .popup-text {
   height: 75%;
-} 
+}  */
 

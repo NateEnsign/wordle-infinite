@@ -4,6 +4,8 @@ import { X } from "lucide-react";
 import SettingsSwitch from "./SettingsSwitch";
 import { AppContext } from "../App";
 
+import './SettingsModal.css';
+
 Modal.setAppElement("#root");
 
 const SettingsModal = ({ settingsModalOpen, closeSettingsModal }) => {

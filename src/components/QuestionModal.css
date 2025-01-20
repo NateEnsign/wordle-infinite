@@ -1,0 +1,126 @@
+.how-modal-body {
+    padding-left: 30px;
+  }
+  
+  .how-btn-container {
+    text-align: right;
+  }
+  
+  .how-btn {
+    all: unset;
+    cursor: pointer;
+  }
+  
+  .how-x {
+    stroke-width: 2.3px;
+    height: 28px;
+    width: 28px;
+  }
+  
+  .how-title {
+    font-size: 28px;
+    font-weight: 600;
+    padding-bottom: 8px;
+  }
+  
+  .how-sm-title {
+    font-size: 22px;
+    font-weight: 100;
+  }
+  
+  .how-list {
+    padding: 0px 15px 10px 20px;
+  }
+  
+  .how-list-item {
+    padding-bottom: 10px;
+  }
+  
+  .how-examples-title {
+    font-weight: 800;
+    padding-bottom: 10px;
+  }
+  
+  .how-letter-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .how-letter {
+    font-size: 22px;
+    font-weight: 600;
+    border: 2px solid grey;
+    margin: 2px;
+    width: 30px;
+    height: 30px;
+    align-content: center;
+    text-align: center;
+  }
+  
+  .how-bold {
+    font-weight: 600;
+  }
+  
+  #how-letter-green-dark {
+    background-color: #528d4e;
+    border: none;
+    height: 34px;
+    width: 34px;
+  }
+  
+  #how-letter-green-light {
+    background-color: #6AAA64;
+    color: white;
+    border: none;
+    height: 34px;
+    width: 34px;
+  }
+  
+  #how-letter-orange {
+    background-color: #f5793a;
+    border: none;
+    height: 34px;
+    width: 34px;
+  }
+  
+  #how-letter-yellow-dark {
+    background-color: #b49f39;
+    border: none;
+    height: 34px;
+    width: 34px;
+  }
+  
+  #how-letter-yellow-light {
+    background-color: #C9B458;
+    color: white;
+    border: none;
+    height: 34px;
+    width: 34px;
+  }
+  
+  #how-letter-blue {
+    background-color: #85bff9;
+    border: none;
+    height: 34px;
+    width: 34px;
+  }
+  
+  #how-letter-grey-dark {
+    background-color: #3a393c;
+    border: none;
+    height: 34px;
+    width: 34px;
+  }
+  
+  #how-letter-grey-light {
+    background-color: #787C7E;
+    color: white;
+    border: none;
+    height: 34px;
+    width: 34px;
+  }
+  
+  .how-example {
+    margin-bottom: 20px;
+  }

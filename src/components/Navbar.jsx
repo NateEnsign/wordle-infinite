@@ -8,6 +8,8 @@ import QuestionModal from "./QuestionModal";
 import SettingsModal from "./SettingsModal";
 import { AppContext } from "../App";
 
+import './Navbar.css';
+
 const Navbar = () => {
   const [questionModalOpen, setQuestionModalOpen] = useState(false);
   const [settingsModalOpen, setSettingsModalOpen] = useState(false);
