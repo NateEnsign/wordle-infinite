@@ -1,0 +1,91 @@
+/* .auth-modal-body {
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+  }
+  
+  .auth-btn-container {
+    text-align: right;
+  }
+  
+  .auth-btn {
+    all: unset;
+    cursor: pointer;
+  }
+  
+  .auth-x {
+    stroke-width: 2.3px;
+    height: 28px;
+    width: 28px;
+  }
+
+  .auth-form-body {
+    height: 450px;
+    width: 400px;
+    background-color: #808080;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .auth-form-inputs {
+    display: flex;
+    flex-direction: column;
+    margin: 50px;
+  } */
+
+  .auth-modal-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative; /* To allow absolute positioning of the button within this container */
+    height: 100%; /* Ensure it takes up the full height of the modal content */
+  }
+  
+  .auth-btn-container {
+    position: absolute;
+    top: 10px;
+    right: 10px; /* Position the "X" button at the top-right */
+  }
+  
+  .auth-btn {
+    all: unset;
+    cursor: pointer;
+  }
+  
+  .auth-x {
+    stroke-width: 2.3px;
+    height: 28px;
+    width: 28px;
+  }
+  
+  .auth-form-body {
+    height: 350px;
+    width: 400px;
+    border: 1px solid #D3D6DA;
+    border-radius: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; /* Center the content vertically */
+  }
+  
+  .auth-form-inputs {
+    display: flex;
+    flex-direction: column;
+    margin: 50px;
+  }
+
+  .auth-form-inputs input {
+    all: unset;
+    text-align: center;
+    margin: 6px;
+    padding: 5px;
+    width: 250px;
+    height: 25px;
+    border: 2px solid #D3D6DA;
+    border-radius: 25px;
+  }
+  

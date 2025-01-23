@@ -7,7 +7,7 @@ import { boardDefault } from "./Words";
 import { generateWordSet } from "./Words";
 // import GameOver from "./components/GameOver";
 import Navbar from "./components/Navbar";
-import SettingsModal from "./components/SettingsModal";
+// import SettingsModal from "./components/SettingsModal";
 import Swal from "sweetalert2";
 
 export const AppContext = createContext();

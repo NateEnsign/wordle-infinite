@@ -6,6 +6,8 @@ import { BarChart2 } from "lucide-react";
 import { Settings } from "lucide-react";
 import QuestionModal from "./QuestionModal";
 import SettingsModal from "./SettingsModal";
+import AuthModal from './AuthModal';
+
 import { AppContext } from "../App";
 
 import './Navbar.css';
@@ -13,6 +15,7 @@ import './Navbar.css';
 const Navbar = () => {
   const [questionModalOpen, setQuestionModalOpen] = useState(false);
   const [settingsModalOpen, setSettingsModalOpen] = useState(false);
+  const [authModalOpen, setAuthModalOpen] = useState(false);
 
   const { darkMode } = useContext(AppContext);
 
@@ -33,6 +36,16 @@ const Navbar = () => {
 
   const closeQuestionModal = () => {
     setQuestionModalOpen(false);
+    document.body.style.overflow = "auto";
+  };
+
+  const openAuthModal = () => {
+    setAuthModalOpen(true);
+    document.body.style.overflow = "hidden";
+  };
+
+  const closeAuthModal = () => {
+    setAuthModalOpen(false);
     document.body.style.overflow = "auto";
   };
 
@@ -63,9 +76,16 @@ const Navbar = () => {
         <h1>Wordle</h1>
       </div>
       <div className="nav-right">
-          <button>
+          {/* <button>
             <h3>Login</h3>
-          </button>
+          </button> */}
+             <button onClick={openAuthModal}>
+          <h3>Login</h3>
+        </button>
+        <AuthModal
+          closeAuthModal={closeAuthModal}
+          authModalOpen={authModalOpen}
+        />
       </div>
     </nav>
   );
