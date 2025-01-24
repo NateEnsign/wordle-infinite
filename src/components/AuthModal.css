@@ -1,91 +1,137 @@
-/* .auth-modal-body {
-   display: flex;
-   flex-direction: column;
-   justify-content: center;
-   align-items: center;
-  }
-  
-  .auth-btn-container {
-    text-align: right;
-  }
-  
-  .auth-btn {
-    all: unset;
-    cursor: pointer;
-  }
-  
-  .auth-x {
-    stroke-width: 2.3px;
-    height: 28px;
-    width: 28px;
-  }
+.auth-modal-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative; /* To allow absolute positioning of the button within this container */
+  height: 100%; /* Ensure it takes up the full height of the modal content */
+}
 
-  .auth-form-body {
-    height: 450px;
+.auth-btn-container {
+  position: absolute;
+  top: 10px;
+  right: 10px; /* Position the "X" button at the top-right */
+}
+
+.auth-btn {
+  all: unset;
+  cursor: pointer;
+}
+
+.auth-x {
+  stroke-width: 2.3px;
+  height: 28px;
+  width: 28px;
+}
+
+.auth-form-body {
+  height: 400px;
+  width: 400px;
+  border: 2px solid #d3d6da;
+  border-radius: 25px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.auth-form-body-dark {
+    height: 400px;
     width: 400px;
-    background-color: #808080;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .auth-form-inputs {
-    display: flex;
-    flex-direction: column;
-    margin: 50px;
-  } */
-
-  .auth-modal-body {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    position: relative; /* To allow absolute positioning of the button within this container */
-    height: 100%; /* Ensure it takes up the full height of the modal content */
-  }
-  
-  .auth-btn-container {
-    position: absolute;
-    top: 10px;
-    right: 10px; /* Position the "X" button at the top-right */
-  }
-  
-  .auth-btn {
-    all: unset;
-    cursor: pointer;
-  }
-  
-  .auth-x {
-    stroke-width: 2.3px;
-    height: 28px;
-    width: 28px;
-  }
-  
-  .auth-form-body {
-    height: 350px;
-    width: 400px;
-    border: 1px solid #D3D6DA;
+    border: 2px solid #808080;
     border-radius: 25px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center; /* Center the content vertically */
-  }
-  
-  .auth-form-inputs {
-    display: flex;
-    flex-direction: column;
-    margin: 50px;
+    justify-content: flex-start;
   }
 
-  .auth-form-inputs input {
+.auth-form-header {
+  margin-top: 30px;
+}
+
+.auth-form-inputs {
+  display: flex;
+  flex-direction: column;
+  margin: 50px;
+}
+
+.auth-input {
     all: unset;
     text-align: center;
-    margin: 6px;
+    margin: 10px;
     padding: 5px;
     width: 250px;
     height: 25px;
-    border: 2px solid #D3D6DA;
     border-radius: 25px;
+    border: 2px solid #d3d6da;
+}
+
+.auth-input-dark {
+    all: unset;
+    text-align: center;
+    margin: 10px;
+    padding: 5px;
+    width: 250px;
+    height: 25px;
+    border-radius: 25px;
+    border: 2px solid #808080;
+}
+
+
+
+.login-btn-light {
+    all: unset;
+    text-align: center;
+    background-color: #d3d6da;
+    margin: 6px;
+    padding: 10px;
+    border-radius: 4px;
+    width: 60px;
+    align-self: center;
+}
+
+.login-btn-light:hover {
+  cursor: pointer;
+  background-color: #808080;
+}
+
+.login-btn-dark {
+  all: unset;
+  text-align: center;
+  background-color: #808080;
+  margin: 10px;
+  padding: 10px;
+  border-radius: 4px;
+  width: 60px;
+  align-self: center;
+}
+
+.login-btn-dark:hover {
+  cursor: pointer;
+  background-color: #d3d6da;
+}
+
+.toggle-mode-btn {
+  all: unset;
+  border: 1px solid #d3d6da;
+  border-radius: 4px;
+  padding: 8px 12px;
+  font-size: 14px;
+  cursor: pointer;
+  position: absolute;
+  bottom: 20px;
+}
+
+.toggle-mode-btn-dark {
+    all: unset;
+    border: 1px solid #808080;;
+    border-radius: 4px;
+    padding: 8px 12px;
+    font-size: 14px;
+    cursor: pointer;
+    position: absolute;
+    bottom: 20px;
   }
+
   
