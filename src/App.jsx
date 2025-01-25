@@ -13,6 +13,7 @@ import Swal from "sweetalert2";
 export const AppContext = createContext();
 
 function App() {
+  const [authModalOpen, setAuthModalOpen] = useState(false);
   const [board, setBoard] = useState(boardDefault);
   const [currentAttempt, setCurrentAttempt] = useState({
     attempt: 0,
@@ -115,6 +116,7 @@ function App() {
   }, []);
 
   const onSelectLetter = (keyVal) => {
+
     if (currentAttempt.letterPos > 4) return;
     const newBoard = [...board];
     newBoard[currentAttempt.attempt][currentAttempt.letterPos] = keyVal;
@@ -257,7 +259,7 @@ function App() {
   const lightState = darkMode ? "app-dark" : "app-light";
 
   return (
-    <div className={lightState}>
+    <body className={lightState}>
       <AppContext.Provider
         value={{
           board,
@@ -286,6 +288,8 @@ function App() {
           handleChangeKeyboardMode,
           onScreenOnly,
           disabledHard,
+          authModalOpen,
+          setAuthModalOpen,
         }}
       >
         <Navbar />
@@ -298,7 +302,7 @@ function App() {
           closeSettingsModal={() => setSettingsModalOpen(false)}
         /> */}
       </AppContext.Provider>
-    </div>
+    </body>
   );
 }
 

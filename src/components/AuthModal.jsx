@@ -3,21 +3,16 @@ import Modal from "react-modal";
 import { X } from "lucide-react";
 import { AppContext } from "../App";
 
-import './AuthModal.css';
+import "./AuthModal.css";
 
 Modal.setAppElement("#root");
 
-const AuthModal = ({ authModalOpen, closeAuthModal }) => {
-  const { highContrast, darkMode } = useContext(AppContext);
+const AuthModal = ({closeAuthModal, authModalOpen}) => {
+  const { darkMode } = useContext(AppContext);
 
   // State to toggle between login and signup modes
   const [isLoginMode, setIsLoginMode] = useState(true);
 
-  const correctLetter = !highContrast && !darkMode ? "how-letter-green-light" : !highContrast ? "how-letter-green-dark" : "how-letter-orange";
-
-  const almostLetter = !highContrast && !darkMode ? "how-letter-yellow-light" : !highContrast ? "how-letter-yellow-dark" : "how-letter-blue";
-
-  const nonLetter = !darkMode ? "how-letter-grey-light" : "how-letter-grey-dark";
 
   const customStyles = darkMode
     ? {
@@ -85,18 +80,34 @@ const AuthModal = ({ authModalOpen, closeAuthModal }) => {
             <X className="auth-x" />
           </button>
         </div>
-        <div className={!darkMode ? 'auth-form-body' : 'auth-form-body-dark'}>
-          <h3 className="auth-form-header">Must be logged in to track stats!</h3>
-          <form className='auth-form-inputs'>
-            {!isLoginMode && <input type="text" placeholder="Name" className={!darkMode ? 'auth-input' : 'auth-input-dark'} />}
-            <input type="email" placeholder="Email" className={!darkMode ? 'auth-input' : 'auth-input-dark'} />
-            <input type="password" placeholder="Password" className={!darkMode ? 'auth-input' : 'auth-input-dark'}  />
-            <button className={darkMode ? 'login-btn-dark' : 'login-btn-light'}>
-                {isLoginMode ? 'LOGIN' : 'SIGNUP'}
+        <div className={!darkMode ? "auth-form-body" : "auth-form-body-dark"}>
+          <h3 className="auth-form-header">
+            Must be logged in to track stats!
+          </h3>
+          <form className="auth-form-inputs">
+            {!isLoginMode && (
+              <input
+                type="text"
+                placeholder="Name"
+                className={!darkMode ? "auth-input" : "auth-input-dark"}
+              />
+            )}
+            <input
+              type="email"
+              placeholder="Email"
+              className={!darkMode ? "auth-input" : "auth-input-dark"}
+            />
+            <input
+              type="password"
+              placeholder="Password"
+              className={!darkMode ? "auth-input" : "auth-input-dark"}
+            />
+            <button className={darkMode ? "login-btn-dark" : "login-btn-light"}>
+              {isLoginMode ? "LOGIN" : "SIGNUP"}
             </button>
           </form>
           <button
-            className={!darkMode ? 'toggle-mode-btn' : 'toggle-mode-btn-dark'}
+            className={!darkMode ? "toggle-mode-btn" : "toggle-mode-btn-dark"}
             onClick={() => setIsLoginMode(!isLoginMode)}
           >
             {isLoginMode

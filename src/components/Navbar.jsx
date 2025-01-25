@@ -15,9 +15,8 @@ import './Navbar.css';
 const Navbar = () => {
   const [questionModalOpen, setQuestionModalOpen] = useState(false);
   const [settingsModalOpen, setSettingsModalOpen] = useState(false);
-  const [authModalOpen, setAuthModalOpen] = useState(false);
 
-  const { darkMode } = useContext(AppContext);
+  const { darkMode, authModalOpen, setAuthModalOpen } = useContext(AppContext);
 
   const openSettingsModal = () => {
     setSettingsModalOpen(true);
@@ -49,6 +48,7 @@ const Navbar = () => {
     document.body.style.overflow = "auto";
   };
 
+
   const navState = darkMode ? "nav-dark" : "nav-light";
 
   return (
@@ -76,9 +76,6 @@ const Navbar = () => {
         <h1>Wordle</h1>
       </div>
       <div className="nav-right">
-          {/* <button>
-            <h3>Login</h3>
-          </button> */}
              <button onClick={openAuthModal}>
           <h3>Login</h3>
         </button>
@@ -92,3 +89,8 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
+
+
+
+
