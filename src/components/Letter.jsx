@@ -108,7 +108,7 @@ const Letter = ({ letterPos, attemptVal }) => {
   const darkState = darkMode ? "dark-letter" : "light-letter";
 
   return (
-    <div className={`${darkState} ${isPulsing ? "pulsing-border" : ""}`} id={letterState}>
+    <div className={`${darkState} ${isPulsing ? "pulsing-border" : ""}`} id={letterState ? letterState : ""}>
       {letter}
     </div>
   );

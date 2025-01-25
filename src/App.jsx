@@ -259,7 +259,7 @@ function App() {
   const lightState = darkMode ? "app-dark" : "app-light";
 
   return (
-    <body className={lightState}>
+    <div className={lightState}>
       <AppContext.Provider
         value={{
           board,
@@ -302,7 +302,7 @@ function App() {
           closeSettingsModal={() => setSettingsModalOpen(false)}
         /> */}
       </AppContext.Provider>
-    </body>
+    </div>
   );
 }
 
