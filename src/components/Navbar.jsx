@@ -16,7 +16,7 @@ const Navbar = () => {
   const [questionModalOpen, setQuestionModalOpen] = useState(false);
   const [settingsModalOpen, setSettingsModalOpen] = useState(false);
 
-  const { darkMode, authModalOpen, setAuthModalOpen } = useContext(AppContext);
+  const { darkMode, authModalOpen, setAuthModalOpen, isLoggedIn } = useContext(AppContext);
 
   const openSettingsModal = () => {
     setSettingsModalOpen(true);
@@ -77,7 +77,7 @@ const Navbar = () => {
       </div>
       <div className="nav-right">
              <button onClick={openAuthModal}>
-          <h3>Login</h3>
+          <h3>{!isLoggedIn ? 'Login' : 'Welcome Name'}</h3>
         </button>
         <AuthModal
           closeAuthModal={closeAuthModal}
