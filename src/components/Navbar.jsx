@@ -16,7 +16,7 @@ const Navbar = () => {
   const [questionModalOpen, setQuestionModalOpen] = useState(false);
   const [settingsModalOpen, setSettingsModalOpen] = useState(false);
 
-  const { darkMode, authModalOpen, setAuthModalOpen, isLoggedIn } =
+  const { darkMode, authModalOpen, setAuthModalOpen, isLoggedIn, setIsLoggedIn } =
     useContext(AppContext);
 
   const openSettingsModal = () => {
@@ -48,6 +48,10 @@ const Navbar = () => {
     setAuthModalOpen(false);
     document.body.style.overflow = "auto";
   };
+
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+  }
 
   const navState = darkMode ? "nav-dark" : "nav-light";
 
@@ -83,7 +87,7 @@ const Navbar = () => {
         ) : (
           <div className="nav-right-loggedin">
               <h3>Wecome Name</h3>
-            <button>
+            <button onClick={handleLogout}>
               <p className="logout-btn">Log Out</p>
             </button>
           </div>
