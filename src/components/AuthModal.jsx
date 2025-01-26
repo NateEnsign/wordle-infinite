@@ -20,6 +20,8 @@ const AuthModal = ({
   setEmailInput,
   passwordInput,
   setPasswordInput,
+  submitAttempt,
+  setSubmitAttempt,
 }) => {
   const { darkMode, isLoggedIn, setIsLoggedIn } = useContext(AppContext);
 
@@ -32,7 +34,7 @@ const AuthModal = ({
   const [nameError, setNameError] = useState(false);
   const [emailError, setEmailError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
-  const [submitAttempt, setSubmitAttempt] = useState(false);
+  // const [submitAttempt, setSubmitAttempt] = useState(false);
 
   // const handleNameChange = (e) => {
   //   setNameInput(e.target.value);

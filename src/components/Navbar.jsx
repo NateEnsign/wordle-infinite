@@ -20,6 +20,7 @@ const Navbar = () => {
     const [nameInput, setNameInput] = useState("");
     const [emailInput, setEmailInput] = useState("");
     const [passwordInput, setPasswordInput] = useState("");
+    const [submitAttempt, setSubmitAttempt] = useState(false);
 
   const { darkMode, authModalOpen, setAuthModalOpen, isLoggedIn, setIsLoggedIn } =
     useContext(AppContext);
@@ -54,6 +55,7 @@ const Navbar = () => {
     setEmailInput("");
     setPasswordInput("");
     setNameInput('');
+    setSubmitAttempt(false);
     document.body.style.overflow = "auto";
   };
 
@@ -111,6 +113,8 @@ const Navbar = () => {
           setEmailInput={setEmailInput}
           passwordInput={passwordInput}
           setPasswordInput={setPasswordInput}
+          submitAttempt={submitAttempt}
+          setSubmitAttempt={setSubmitAttempt}
         />
       </div>
     </nav>
