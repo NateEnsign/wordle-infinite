@@ -6,17 +6,18 @@ import { BarChart2 } from "lucide-react";
 import { Settings } from "lucide-react";
 import QuestionModal from "./QuestionModal";
 import SettingsModal from "./SettingsModal";
-import AuthModal from './AuthModal';
+import AuthModal from "./AuthModal";
 
 import { AppContext } from "../App";
 
-import './Navbar.css';
+import "./Navbar.css";
 
 const Navbar = () => {
   const [questionModalOpen, setQuestionModalOpen] = useState(false);
   const [settingsModalOpen, setSettingsModalOpen] = useState(false);
 
-  const { darkMode, authModalOpen, setAuthModalOpen, isLoggedIn } = useContext(AppContext);
+  const { darkMode, authModalOpen, setAuthModalOpen, isLoggedIn } =
+    useContext(AppContext);
 
   const openSettingsModal = () => {
     setSettingsModalOpen(true);
@@ -48,7 +49,6 @@ const Navbar = () => {
     document.body.style.overflow = "auto";
   };
 
-
   const navState = darkMode ? "nav-dark" : "nav-light";
 
   return (
@@ -76,9 +76,18 @@ const Navbar = () => {
         <h1>Wordle</h1>
       </div>
       <div className="nav-right">
-             <button onClick={openAuthModal}>
-          <h3>{!isLoggedIn ? 'Login' : 'Welcome Name'}</h3>
-        </button>
+        {!isLoggedIn ? (
+          <button onClick={openAuthModal}>
+            <h3>Login</h3>
+          </button>
+        ) : (
+          <div className="nav-right-loggedin">
+              <h3>Wecome Name</h3>
+            <button>
+              <p className="logout-btn">Log Out</p>
+            </button>
+          </div>
+        )}
         <AuthModal
           closeAuthModal={closeAuthModal}
           authModalOpen={authModalOpen}
@@ -89,8 +98,3 @@ const Navbar = () => {
 };
 
 export default Navbar;
-
-
-
-
-

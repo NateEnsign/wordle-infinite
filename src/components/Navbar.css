@@ -56,3 +56,13 @@
     display: flex;
     justify-content: flex-end;
   }
+
+  .nav-right-loggedin {
+    display: flex;
+    gap: 15px;
+  }
+
+  .logout-btn {
+    font-size: small;
+    padding-top: 2px;
+  }
