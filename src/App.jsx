@@ -13,6 +13,7 @@ import Swal from "sweetalert2";
 export const AppContext = createContext();
 
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [authModalOpen, setAuthModalOpen] = useState(false);
   const [board, setBoard] = useState(boardDefault);
   const [currentAttempt, setCurrentAttempt] = useState({
@@ -290,6 +291,8 @@ function App() {
           disabledHard,
           authModalOpen,
           setAuthModalOpen,
+          isLoggedIn,
+          setIsLoggedIn,
         }}
       >
         <Navbar />

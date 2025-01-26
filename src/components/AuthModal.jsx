@@ -1,18 +1,129 @@
 import React, { useState, useContext } from "react";
 import Modal from "react-modal";
 import { X } from "lucide-react";
+import Swal from "sweetalert2";
+
 import { AppContext } from "../App";
 
 import "./AuthModal.css";
 
 Modal.setAppElement("#root");
 
-const AuthModal = ({closeAuthModal, authModalOpen}) => {
-  const { darkMode } = useContext(AppContext);
+const AuthModal = ({ closeAuthModal, authModalOpen }) => {
+  const { darkMode, isLoggedIn, setIsLoggedIn } = useContext(AppContext);
 
   // State to toggle between login and signup modes
   const [isLoginMode, setIsLoginMode] = useState(true);
+  const [formValid, setFormValid] = useState(false);
+  const [nameInput, setNameInput] = useState("");
+  const [emailInput, setEmailInput] = useState("");
+  const [passwordInput, setPasswordInput] = useState("");
 
+  const [nameError, setNameError] = useState(false);
+  const [emailError, setEmailError] = useState(false);
+  const [passwordError, setPasswordError] = useState(false);
+  const [submitAttempt, setSubmitAttempt] = useState(false);
+
+  // const handleNameChange = (e) => {
+  //   setNameInput(e.target.value);
+  // };
+
+  const handleNameChange = (e) => {
+    const value = e.target.value;
+    setNameInput(value);
+    if (!isLoginMode && value.trim().length < 1) {
+      setNameError(true);
+    } else {
+      setNameError(false);
+    }
+  };
+
+  // const handleEmailChange = (e) => {
+  //   setEmailInput(e.target.value);
+  // };
+
+  const handleEmailChange = (e) => {
+    const value = e.target.value;
+    setEmailInput(value);
+    if (!value.includes("@") || !value.includes(".")) {
+      setEmailError(true);
+    } else {
+      setEmailError(false);
+    }
+  };
+
+  // const handlePasswordChange = (e) => {
+  //   setPasswordInput(e.target.value);
+  // };
+
+  const handlePasswordChange = (e) => {
+    const value = e.target.value;
+    setPasswordInput(value);
+    if (value.trim().length < 6) {
+      setPasswordError(true);
+    } else {
+      setPasswordError(false);
+    }
+  };
+
+  const validateInputs = () => {
+    const errors = [];
+
+    if (!isLoginMode && nameInput.trim().length < 1) {
+      errors.push("Name is required.");
+      setNameError(true);
+    } else {
+      setNameError(false);
+    }
+
+    if (!emailInput.includes("@") || !emailInput.includes(".")) {
+      errors.push("Please add a valid email address.");
+      setEmailError(true);
+    } else {
+      setEmailError(false);
+    }
+
+    if (passwordInput.trim().length < 6) {
+      errors.push("Password must be at least 6 characters long.");
+      setPasswordError(true);
+    } else {
+      setPasswordError(false);
+    }
+
+    if (errors.length > 0) {
+      alert(errors.join("\n"));
+      return false;
+    }
+    return true;
+  };
+
+  const handleLogin = () => {
+    console.log(
+      `Logged in with email: ${emailInput} and password: ${passwordInput}`
+    );
+    setIsLoggedIn(true);
+    closeAuthModal();
+  };
+
+  const handleSignup = () => {
+    console.log(
+      `Signed up with name: ${nameInput}, email: ${emailInput} and password: ${passwordInput}`
+    );
+    setIsLoggedIn(true);
+    closeAuthModal();
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setSubmitAttempt(true);
+    if (validateInputs()) {
+      if (isLoginMode) {
+        handleLogin(emailInput, passwordInput);
+      } else {
+        handleSignup(nameInput, emailInput, passwordInput);
+      }
+    }
+  };
 
   const customStyles = darkMode
     ? {
@@ -84,25 +195,37 @@ const AuthModal = ({closeAuthModal, authModalOpen}) => {
           <h3 className="auth-form-header">
             Must be logged in to track stats!
           </h3>
-          <form className="auth-form-inputs">
+          <form className="auth-form-inputs" onSubmit={handleSubmit}>
             {!isLoginMode && (
               <input
                 type="text"
                 placeholder="Name"
+                style={{border: nameError && submitAttempt ? "1px solid red" : ""}}
                 className={!darkMode ? "auth-input" : "auth-input-dark"}
+                value={nameInput}
+                onChange={handleNameChange}
               />
             )}
             <input
-              type="email"
+              type="text"
               placeholder="Email"
+              style={{border: emailError && submitAttempt ? "1px solid red" : ""}}
               className={!darkMode ? "auth-input" : "auth-input-dark"}
+              value={emailInput}
+              onChange={handleEmailChange}
             />
             <input
               type="password"
               placeholder="Password"
+              style={{border: passwordError && submitAttempt ? "1px solid red" : ""}}
               className={!darkMode ? "auth-input" : "auth-input-dark"}
+              value={passwordInput}
+              onChange={handlePasswordChange}
             />
-            <button className={darkMode ? "login-btn-dark" : "login-btn-light"}>
+            <button
+              className={darkMode ? "login-btn-dark" : "login-btn-light"}
+              type="submit"
+            >
               {isLoginMode ? "LOGIN" : "SIGNUP"}
             </button>
           </form>
