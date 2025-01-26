@@ -13,7 +13,7 @@ import Swal from "sweetalert2";
 export const AppContext = createContext();
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  // const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [authModalOpen, setAuthModalOpen] = useState(false);
   const [board, setBoard] = useState(boardDefault);
   const [currentAttempt, setCurrentAttempt] = useState({
@@ -53,6 +53,15 @@ function App() {
     const savedKeyboardMode = localStorage.getItem("keyboardState");
     return savedKeyboardMode !== null ? JSON.parse(savedKeyboardMode) : false;
   });
+
+  const [isLoggedIn, setIsLoggedIn] = useState(() => {
+    const savedLoggedInMode = localStorage.getItem("loggedInState");
+    return savedLoggedInMode !== null ? JSON.parse(savedLoggedInMode) : false;
+  });
+
+  useEffect(() => {
+    localStorage.setItem("loggedInState", JSON.stringify(isLoggedIn));
+  }, [isLoggedIn]);
 
   useEffect(() => {
     localStorage.setItem("contrastState", JSON.stringify(highContrast));
