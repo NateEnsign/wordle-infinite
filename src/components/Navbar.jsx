@@ -16,6 +16,11 @@ const Navbar = () => {
   const [questionModalOpen, setQuestionModalOpen] = useState(false);
   const [settingsModalOpen, setSettingsModalOpen] = useState(false);
 
+    const [isLoginMode, setIsLoginMode] = useState(true);
+    const [nameInput, setNameInput] = useState("");
+    const [emailInput, setEmailInput] = useState("");
+    const [passwordInput, setPasswordInput] = useState("");
+
   const { darkMode, authModalOpen, setAuthModalOpen, isLoggedIn, setIsLoggedIn } =
     useContext(AppContext);
 
@@ -46,6 +51,9 @@ const Navbar = () => {
 
   const closeAuthModal = () => {
     setAuthModalOpen(false);
+    setEmailInput("");
+    setPasswordInput("");
+    setNameInput('');
     document.body.style.overflow = "auto";
   };
 
@@ -95,6 +103,14 @@ const Navbar = () => {
         <AuthModal
           closeAuthModal={closeAuthModal}
           authModalOpen={authModalOpen}
+          isLoginMode={isLoginMode}
+          setIsLoginMode={setIsLoginMode}
+          nameInput={nameInput}
+          setNameInput={setNameInput}
+          emailInput={emailInput}
+          setEmailInput={setEmailInput}
+          passwordInput={passwordInput}
+          setPasswordInput={setPasswordInput}
         />
       </div>
     </nav>

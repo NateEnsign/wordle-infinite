@@ -9,15 +9,25 @@ import "./AuthModal.css";
 
 Modal.setAppElement("#root");
 
-const AuthModal = ({ closeAuthModal, authModalOpen }) => {
+const AuthModal = ({
+  closeAuthModal,
+  authModalOpen,
+  isLoginMode,
+  setIsLoginMode,
+  nameInput,
+  setNameInput,
+  emailInput,
+  setEmailInput,
+  passwordInput,
+  setPasswordInput,
+}) => {
   const { darkMode, isLoggedIn, setIsLoggedIn } = useContext(AppContext);
 
   // State to toggle between login and signup modes
-  const [isLoginMode, setIsLoginMode] = useState(true);
-  const [formValid, setFormValid] = useState(false);
-  const [nameInput, setNameInput] = useState("");
-  const [emailInput, setEmailInput] = useState("");
-  const [passwordInput, setPasswordInput] = useState("");
+  // const [isLoginMode, setIsLoginMode] = useState(true);
+  // const [nameInput, setNameInput] = useState("");
+  // const [emailInput, setEmailInput] = useState("");
+  // const [passwordInput, setPasswordInput] = useState("");
 
   const [nameError, setNameError] = useState(false);
   const [emailError, setEmailError] = useState(false);
@@ -102,6 +112,9 @@ const AuthModal = ({ closeAuthModal, authModalOpen }) => {
       `Logged in with email: ${emailInput} and password: ${passwordInput}`
     );
     setIsLoggedIn(true);
+    setNameInput("");
+    setEmailInput("");
+    setPasswordInput("");
     closeAuthModal();
   };
 
@@ -110,6 +123,9 @@ const AuthModal = ({ closeAuthModal, authModalOpen }) => {
       `Signed up with name: ${nameInput}, email: ${emailInput} and password: ${passwordInput}`
     );
     setIsLoggedIn(true);
+    setNameInput("");
+    setEmailInput("");
+    setPasswordInput("");
     closeAuthModal();
   };
 
@@ -200,7 +216,9 @@ const AuthModal = ({ closeAuthModal, authModalOpen }) => {
               <input
                 type="text"
                 placeholder="Name"
-                style={{border: nameError && submitAttempt ? "1px solid red" : ""}}
+                style={{
+                  border: nameError && submitAttempt ? "1px solid red" : "",
+                }}
                 className={!darkMode ? "auth-input" : "auth-input-dark"}
                 value={nameInput}
                 onChange={handleNameChange}
@@ -209,7 +227,9 @@ const AuthModal = ({ closeAuthModal, authModalOpen }) => {
             <input
               type="text"
               placeholder="Email"
-              style={{border: emailError && submitAttempt ? "1px solid red" : ""}}
+              style={{
+                border: emailError && submitAttempt ? "1px solid red" : "",
+              }}
               className={!darkMode ? "auth-input" : "auth-input-dark"}
               value={emailInput}
               onChange={handleEmailChange}
@@ -217,7 +237,9 @@ const AuthModal = ({ closeAuthModal, authModalOpen }) => {
             <input
               type="password"
               placeholder="Password"
-              style={{border: passwordError && submitAttempt ? "1px solid red" : ""}}
+              style={{
+                border: passwordError && submitAttempt ? "1px solid red" : "",
+              }}
               className={!darkMode ? "auth-input" : "auth-input-dark"}
               value={passwordInput}
               onChange={handlePasswordChange}
