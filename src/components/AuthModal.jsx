@@ -1,7 +1,6 @@
 import React, { useState, useContext } from "react";
 import Modal from "react-modal";
 import { X } from "lucide-react";
-import Swal from "sweetalert2";
 
 import { AppContext } from "../App";
 
@@ -25,20 +24,9 @@ const AuthModal = ({
 }) => {
   const { darkMode, isLoggedIn, setIsLoggedIn } = useContext(AppContext);
 
-  // State to toggle between login and signup modes
-  // const [isLoginMode, setIsLoginMode] = useState(true);
-  // const [nameInput, setNameInput] = useState("");
-  // const [emailInput, setEmailInput] = useState("");
-  // const [passwordInput, setPasswordInput] = useState("");
-
   const [nameError, setNameError] = useState(false);
   const [emailError, setEmailError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
-  // const [submitAttempt, setSubmitAttempt] = useState(false);
-
-  // const handleNameChange = (e) => {
-  //   setNameInput(e.target.value);
-  // };
 
   const handleNameChange = (e) => {
     const value = e.target.value;
@@ -50,10 +38,6 @@ const AuthModal = ({
     }
   };
 
-  // const handleEmailChange = (e) => {
-  //   setEmailInput(e.target.value);
-  // };
-
   const handleEmailChange = (e) => {
     const value = e.target.value;
     setEmailInput(value);
@@ -64,9 +48,6 @@ const AuthModal = ({
     }
   };
 
-  // const handlePasswordChange = (e) => {
-  //   setPasswordInput(e.target.value);
-  // };
 
   const handlePasswordChange = (e) => {
     const value = e.target.value;
@@ -79,34 +60,37 @@ const AuthModal = ({
   };
 
   const validateInputs = () => {
+    let isValid = true;
     const errors = [];
 
     if (!isLoginMode && nameInput.trim().length < 1) {
-      errors.push("Name is required.");
       setNameError(true);
+      errors.push("Name is required.");
+      isValid = false; 
     } else {
       setNameError(false);
     }
 
     if (!emailInput.includes("@") || !emailInput.includes(".")) {
-      errors.push("Please add a valid email address.");
       setEmailError(true);
+      errors.push("Please add a valid email address.");
+      isValid = false;
     } else {
       setEmailError(false);
     }
 
     if (passwordInput.trim().length < 6) {
-      errors.push("Password must be at least 6 characters long.");
       setPasswordError(true);
+      errors.push("Password must be at least 6 characters long.");
+      isValid = false;
     } else {
       setPasswordError(false);
     }
 
     if (errors.length > 0) {
       alert(errors.join("\n"));
-      return false;
     }
-    return true;
+    return isValid;
   };
 
   const handleLogin = () => {
