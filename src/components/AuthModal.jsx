@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import Modal from "react-modal";
 import { X } from "lucide-react";
+import axios from 'axios';
 
 import { AppContext } from "../App";
 
@@ -22,7 +23,7 @@ const AuthModal = ({
   submitAttempt,
   setSubmitAttempt,
 }) => {
-  const { darkMode, isLoggedIn, setIsLoggedIn } = useContext(AppContext);
+  const { darkMode, setIsLoggedIn } = useContext(AppContext);
 
   const [nameError, setNameError] = useState(false);
   const [emailError, setEmailError] = useState(false);
@@ -104,16 +105,49 @@ const AuthModal = ({
     closeAuthModal();
   };
 
-  const handleSignup = () => {
-    console.log(
-      `Signed up with name: ${nameInput}, email: ${emailInput} and password: ${passwordInput}`
-    );
-    setIsLoggedIn(true);
-    setNameInput("");
-    setEmailInput("");
-    setPasswordInput("");
-    closeAuthModal();
+  // const handleSignup = () => {
+  //   console.log(
+  //     `Signed up with name: ${nameInput}, email: ${emailInput} and password: ${passwordInput}`
+  //   );
+  //   setIsLoggedIn(true);
+  //   setNameInput("");
+  //   setEmailInput("");
+  //   setPasswordInput("");
+  //   closeAuthModal();
+  // };
+
+  const handleSignup = async () => {
+    try {
+      const response = await axios.post('http://localhost:5000/api/users/signup', {
+        name: nameInput,
+        email: emailInput,
+        password: passwordInput,
+        stats: {
+          gamesWon: 0,
+          gamesLost: 0
+        },
+        winDistribution: {
+          oneTry: 0,
+          twoTry: 0,
+          threeTry: 0,
+          fourTry: 0,
+          fiveTry: 0,
+          sixTry: 0
+        }
+      });
+      console.log('User signed up successfully:', response.data);
+      setIsLoggedIn(true);
+      setNameInput("");
+      setEmailInput("");
+      setPasswordInput("");
+      closeAuthModal();
+    } catch (error) {
+      console.error('Error signing up:', error.response ? error.response.data : error.message);
+    }
   };
+
+
+
 
   const handleSubmit = (e) => {
     e.preventDefault();

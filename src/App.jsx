@@ -1,19 +1,17 @@
 import React, { useState, createContext, useEffect } from "react";
 
+
 import "./App.css";
 import Board from "./components/Board";
 import Keyboard from "./components/Keyboard";
 import { boardDefault } from "./Words";
 import { generateWordSet } from "./Words";
-// import GameOver from "./components/GameOver";
 import Navbar from "./components/Navbar";
-// import SettingsModal from "./components/SettingsModal";
 import Swal from "sweetalert2";
 
 export const AppContext = createContext();
 
 function App() {
-  // const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [authModalOpen, setAuthModalOpen] = useState(false);
   const [board, setBoard] = useState(boardDefault);
   const [currentAttempt, setCurrentAttempt] = useState({
@@ -27,12 +25,7 @@ function App() {
   const [almostKeys, setAlmostKeys] = useState([]);
   const [disabledHard, setDisabledHard] = useState(false);
 
-  // const [gameOver, setGameOver] = useState({
-  //   gameOver: false,
-  //   guessedWord: false,
-  // });
   const [correctWord, setCorrectWord] = useState("");
-  const [settingsModalOpen, setSettingsModalOpen] = useState(false);
 
   const [highContrast, setHighContrast] = useState(() => {
     const savedContrast = localStorage.getItem("contrastState");
@@ -121,7 +114,6 @@ function App() {
     generateWordSet().then((words) => {
       setWordSet(words.wordSet);
       setCorrectWord(words.todaysWord);
-      // setCorrectWord('olloo')
     });
   }, []);
 
@@ -236,8 +228,6 @@ function App() {
         },
       });
       return;
-      // setGameOver({ gameOver: true, guessedWord: true });
-      // return;
     }
 
     if (currentAttempt.attempt === 5 && wordSet.has(currWord.toLowerCase())) {
@@ -261,8 +251,6 @@ function App() {
         },
       });
       return;
-      // setGameOver({ gameOver: true, guessedWord: false });
-      // return;
     }
   };
 
@@ -282,8 +270,6 @@ function App() {
           correctWord,
           disabledLetters,
           setDisabledLetters,
-          // gameOver,
-          // setGameOver,
           highContrast,
           setHighContrast,
           correctKeys,
@@ -309,10 +295,6 @@ function App() {
           <Board />
           <Keyboard />
         </div>
-        {/* <SettingsModal
-          settingsModalOpen={settingsModalOpen}
-          closeSettingsModal={() => setSettingsModalOpen(false)}
-        /> */}
       </AppContext.Provider>
     </div>
   );
