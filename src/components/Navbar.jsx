@@ -22,7 +22,7 @@ const Navbar = () => {
     const [passwordInput, setPasswordInput] = useState("");
     const [submitAttempt, setSubmitAttempt] = useState(false);
 
-  const { darkMode, authModalOpen, setAuthModalOpen, isLoggedIn, setIsLoggedIn } =
+  const { darkMode, authModalOpen, setAuthModalOpen, isLoggedIn, setIsLoggedIn, setUserId } =
     useContext(AppContext);
 
   const openSettingsModal = () => {
@@ -60,7 +60,9 @@ const Navbar = () => {
   };
 
   const handleLogout = () => {
+    setUserId(null);
     setIsLoggedIn(false);
+
   }
 
   const navState = darkMode ? "nav-dark" : "nav-light";

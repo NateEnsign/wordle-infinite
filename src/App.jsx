@@ -1,6 +1,5 @@
 import React, { useState, createContext, useEffect } from "react";
 
-
 import "./App.css";
 import Board from "./components/Board";
 import Keyboard from "./components/Keyboard";
@@ -12,6 +11,7 @@ import Swal from "sweetalert2";
 export const AppContext = createContext();
 
 function App() {
+  const [userId, setUserId] = useState(null);
   const [authModalOpen, setAuthModalOpen] = useState(false);
   const [board, setBoard] = useState(boardDefault);
   const [currentAttempt, setCurrentAttempt] = useState({
@@ -118,7 +118,6 @@ function App() {
   }, []);
 
   const onSelectLetter = (keyVal) => {
-
     if (currentAttempt.letterPos > 4) return;
     const newBoard = [...board];
     newBoard[currentAttempt.attempt][currentAttempt.letterPos] = keyVal;
@@ -288,6 +287,8 @@ function App() {
           setAuthModalOpen,
           isLoggedIn,
           setIsLoggedIn,
+          userId,
+          setUserId,
         }}
       >
         <Navbar />

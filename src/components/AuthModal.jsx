@@ -23,7 +23,7 @@ const AuthModal = ({
   submitAttempt,
   setSubmitAttempt,
 }) => {
-  const { darkMode, setIsLoggedIn } = useContext(AppContext);
+  const { darkMode, setIsLoggedIn, setUserId, userId } = useContext(AppContext);
 
   const [nameError, setNameError] = useState(false);
   const [emailError, setEmailError] = useState(false);
@@ -94,16 +94,36 @@ const AuthModal = ({
     return isValid;
   };
 
-  const handleLogin = () => {
-    console.log(
-      `Logged in with email: ${emailInput} and password: ${passwordInput}`
-    );
-    setIsLoggedIn(true);
-    setNameInput("");
-    setEmailInput("");
-    setPasswordInput("");
-    closeAuthModal();
+  // const handleLogin = () => {
+  //   console.log(
+  //     `Logged in with email: ${emailInput} and password: ${passwordInput}`
+  //   );
+  //   setIsLoggedIn(true);
+  //   setNameInput("");
+  //   setEmailInput("");
+  //   setPasswordInput("");
+  //   closeAuthModal();
+  // };
+
+  const handleLogin = async () => {
+    try {
+      const response = await axios.post('http://localhost:5000/api/users/login', {
+        email: emailInput,
+        password: passwordInput
+      });
+      setUserId(response.data.user.id)
+      
+      console.log('User signed up successfully:', response.data);
+      setIsLoggedIn(true);
+      setNameInput("");
+      setEmailInput("");
+      setPasswordInput("");
+      closeAuthModal();
+    } catch (error) {
+      console.error('Error signing up:', error.response ? error.response.data : error.message);
+    }
   };
+
 
   // const handleSignup = () => {
   //   console.log(
@@ -121,20 +141,10 @@ const AuthModal = ({
       const response = await axios.post('http://localhost:5000/api/users/signup', {
         name: nameInput,
         email: emailInput,
-        password: passwordInput,
-        stats: {
-          gamesWon: 0,
-          gamesLost: 0
-        },
-        winDistribution: {
-          oneTry: 0,
-          twoTry: 0,
-          threeTry: 0,
-          fourTry: 0,
-          fiveTry: 0,
-          sixTry: 0
-        }
+        password: passwordInput
       });
+      setUserId(response.data.user.id)
+      
       console.log('User signed up successfully:', response.data);
       setIsLoggedIn(true);
       setNameInput("");
