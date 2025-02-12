@@ -21,6 +21,7 @@ const Navbar = () => {
     const [emailInput, setEmailInput] = useState("");
     const [passwordInput, setPasswordInput] = useState("");
     const [submitAttempt, setSubmitAttempt] = useState(false);
+    const [loginError, setLoginError] = useState('');
 
   const { darkMode, authModalOpen, setAuthModalOpen, isLoggedIn, setIsLoggedIn, setUserId } =
     useContext(AppContext);
@@ -56,6 +57,7 @@ const Navbar = () => {
     setPasswordInput("");
     setNameInput('');
     setSubmitAttempt(false);
+    setLoginError('');
     document.body.style.overflow = "auto";
   };
 
@@ -117,6 +119,8 @@ const Navbar = () => {
           setPasswordInput={setPasswordInput}
           submitAttempt={submitAttempt}
           setSubmitAttempt={setSubmitAttempt}
+          loginError={loginError}
+          setLoginError={setLoginError}
         />
       </div>
     </nav>

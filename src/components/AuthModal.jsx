@@ -22,12 +22,15 @@ const AuthModal = ({
   setPasswordInput,
   submitAttempt,
   setSubmitAttempt,
+  loginError,
+  setLoginError
 }) => {
   const { darkMode, setIsLoggedIn, setUserId, userId } = useContext(AppContext);
 
   const [nameError, setNameError] = useState(false);
   const [emailError, setEmailError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
+  
 
   const handleNameChange = (e) => {
     const value = e.target.value;
@@ -121,6 +124,7 @@ const AuthModal = ({
       closeAuthModal();
     } catch (error) {
       console.error('Error signing up:', error.response ? error.response.data : error.message);
+      setLoginError(error.response && error.response.data ? error.response.data.message : 'An error occured, please try again.')
     }
   };
 
@@ -156,9 +160,6 @@ const AuthModal = ({
     }
   };
 
-
-
-
   const handleSubmit = (e) => {
     e.preventDefault();
     setSubmitAttempt(true);
@@ -170,6 +171,11 @@ const AuthModal = ({
       }
     }
   };
+
+  const toggleLoginMode = () => {
+    setIsLoginMode(!isLoginMode);
+    setLoginError('');
+  }
 
   const customStyles = darkMode
     ? {
@@ -281,9 +287,10 @@ const AuthModal = ({
               {isLoginMode ? "LOGIN" : "SIGNUP"}
             </button>
           </form>
+          {loginError && <p>{loginError}</p>}
           <button
             className={!darkMode ? "toggle-mode-btn" : "toggle-mode-btn-dark"}
-            onClick={() => setIsLoginMode(!isLoginMode)}
+            onClick={ toggleLoginMode }
           >
             {isLoginMode
               ? "Don't have an account? Sign Up"
