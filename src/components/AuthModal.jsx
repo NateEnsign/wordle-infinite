@@ -124,7 +124,7 @@ const AuthModal = ({
       closeAuthModal();
     } catch (error) {
       console.error('Error signing up:', error.response ? error.response.data : error.message);
-      setLoginError(error.response && error.response.data ? error.response.data.message : 'An error occured, please try again.')
+      setLoginError(error.response && error.response.data ? error.response.data.message : 'An error occured, please try again.');
     }
   };
 
@@ -157,6 +157,7 @@ const AuthModal = ({
       closeAuthModal();
     } catch (error) {
       console.error('Error signing up:', error.response ? error.response.data : error.message);
+      setLoginError(error.response && error.response.data ? error.response.data.message : 'An error occured, please try again.');
     }
   };
 
@@ -287,7 +288,7 @@ const AuthModal = ({
               {isLoginMode ? "LOGIN" : "SIGNUP"}
             </button>
           </form>
-          {loginError && <p>{loginError}</p>}
+          {loginError && <p className="login-error">{loginError}</p>}
           <button
             className={!darkMode ? "toggle-mode-btn" : "toggle-mode-btn-dark"}
             onClick={ toggleLoginMode }
